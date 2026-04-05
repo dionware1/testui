@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZWIN - Game Developer Menu</title>
+    <!-- MODERN BOLD GAMING FONTLAR -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -14,32 +15,36 @@
         }
         
         :root {
-            --primary-color: #6b21a8;
-            --secondary-color: #1a0b2e;
+            /* MODERN DARK PURPLE THEME */
+            --primary-color: #7c3aed;
+            --secondary-color: #0f0518;
             --accent-color: #a855f7;
-            --text-color: #e0e0e0;
-            --text-muted: #888;
-            --bg-dark: #0f0f0f;
-            --bg-panel: rgba(20, 20, 30, 0.95);
-            --border-color: rgba(107, 33, 168, 0.3);
-            --success-color: #22c55e;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --bg-dark: #020617;
+            --bg-panel: rgba(15, 5, 24, 0.98);
+            --border-color: rgba(124, 58, 237, 0.25);
+            --success-color: #10b981;
             --warning-color: #f59e0b;
             --danger-color: #ef4444;
-            --glow-primary: rgba(107, 33, 168, 0.4);
-            --glow-accent: rgba(168, 85, 247, 0.3);
-            --transition-fast: 0.15s ease;
-            --transition-normal: 0.3s ease;
+            --glow-primary: rgba(124, 58, 237, 0.5);
+            --glow-accent: rgba(168, 85, 247, 0.4);
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--bg-dark) 50%, #000 100%);
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 500;
+            background: linear-gradient(135deg, #0f0518 0%, #020617 50%, #000000 100%);
             min-height: 100vh;
             color: var(--text-color);
             overflow: hidden;
             position: relative;
+            letter-spacing: 0.5px;
         }
         
+        /* ANIMATED BACKGROUND */
         body::before {
             content: '';
             position: absolute;
@@ -48,32 +53,37 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(107, 33, 168, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-            animation: bgPulse 8s ease-in-out infinite;
+                radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+            animation: bgPulse 6s ease-in-out infinite;
             pointer-events: none;
         }
         
         @keyframes bgPulse {
             0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+            50% { opacity: 0.9; }
         }
         
         .menu-container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 1600px;
             height: 100vh;
             margin: 0 auto;
             display: flex;
             background: var(--bg-panel);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
             position: relative;
-            box-shadow: 0 0 100px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+            box-shadow: 
+                0 0 150px rgba(0,0,0,0.9),
+                inset 0 0 0 1px rgba(255,255,255,0.08);
+            border: 1px solid rgba(124, 58, 237, 0.15);
         }
         
+        /* SIDEBAR */
         .sidebar {
-            width: 280px;
-            background: linear-gradient(180deg, rgba(26, 11, 46, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
+            width: 320px;
+            background: linear-gradient(180deg, rgba(15, 5, 24, 0.98) 0%, rgba(2, 6, 23, 0.98) 100%);
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -81,112 +91,167 @@
             overflow: hidden;
         }
         
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: linear-gradient(180deg, var(--primary-color) 0%, transparent 100%);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        
+        /* LOGO AREA */
         .logo-area {
-            padding: 30px 25px;
+            padding: 35px 30px;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
         }
         
         .logo {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ffffff 50%, var(--primary-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--glow-primary);
+            background-clip: text;
+            text-shadow: 0 0 40px var(--glow-primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-transform: uppercase;
         }
         
         .logo::before {
             content: '◆';
-            font-size: 24px;
+            font-size: 28px;
             -webkit-text-fill-color: var(--accent-color);
             animation: logoPulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px var(--glow-accent));
         }
         
         @keyframes logoPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
+            0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.15) rotate(45deg); }
         }
         
         .logo-subtitle {
-            font-size: 11px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-top: 5px;
-        }
-        
-        .tab-groups {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px 0;
-        }
-        
-        .tab-group {
-            margin-bottom: 25px;
-        }
-        
-        .tab-group-title {
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-color);
-            padding: 0 25px 10px;
+            letter-spacing: 6px;
+            margin-top: 8px;
             opacity: 0.8;
         }
         
+        /* TAB GROUPS */
+        .tab-groups {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px 0;
+        }
+        
+        .tab-group {
+            margin-bottom: 30px;
+        }
+        
+        .tab-group-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-color);
+            padding: 0 30px 12px;
+            opacity: 0.9;
+            text-shadow: 0 0 10px var(--glow-accent);
+        }
+        
         .tab-item {
-            padding: 14px 25px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            padding: 16px 30px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             transition: all var(--transition-fast);
             border-left: 3px solid transparent;
             position: relative;
-            font-size: 14px;
-            font-weight: 500;
+            text-transform: uppercase;
         }
         
         .tab-item:hover {
-            background: rgba(107, 33, 168, 0.1);
+            background: rgba(124, 58, 237, 0.12);
             border-left-color: var(--primary-color);
+            padding-left: 35px;
         }
         
         .tab-item.active {
-            background: linear-gradient(90deg, rgba(107, 33, 168, 0.2) 0%, transparent 100%);
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.25) 0%, transparent 100%);
             border-left-color: var(--accent-color);
             color: var(--accent-color);
+            font-weight: 700;
         }
         
+        .tab-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-color);
+            box-shadow: 0 0 20px var(--glow-accent);
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+            opacity: 0.7;
+            transition: all var(--transition-fast);
+        }
+        
+        .tab-item.active .tab-icon {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px var(--accent-color));
+            transform: scale(1.1);
+        }
+        
+        /* USER FOOTER */
         .user-footer {
-            padding: 20px 25px;
+            padding: 25px 30px;
             border-top: 1px solid var(--border-color);
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
         }
         
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
         .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 0 15px var(--glow-primary);
+            font-size: 18px;
+            box-shadow: 0 0 25px var(--glow-primary);
+            border: 2px solid rgba(255,255,255,0.1);
         }
         
         .user-details {
@@ -194,64 +259,76 @@
         }
         
         .user-name {
-            font-weight: 600;
-            font-size: 14px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
             color: var(--text-color);
+            text-transform: uppercase;
         }
         
         .user-status {
-            font-size: 11px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
             color: var(--success-color);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            letter-spacing: 1px;
         }
         
         .user-status::before {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: var(--success-color);
             border-radius: 50%;
             animation: statusPulse 2s infinite;
+            box-shadow: 0 0 10px var(--success-color);
         }
         
         @keyframes statusPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
         
         .subscription-info {
-            background: rgba(107, 33, 168, 0.15);
+            background: rgba(124, 58, 237, 0.1);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 10px;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 12px;
         }
         
         .sub-label {
+            font-family: 'Rajdhani', sans-serif;
             font-size: 10px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: var(--text-muted);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .sub-time {
-            font-size: 16px;
-            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
             color: var(--accent-color);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--glow-accent);
         }
         
         .sub-progress {
             width: 100%;
-            height: 3px;
+            height: 4px;
             background: rgba(255,255,255,0.1);
             border-radius: 2px;
-            margin-top: 8px;
+            margin-top: 12px;
             overflow: hidden;
         }
         
@@ -261,40 +338,46 @@
             background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
             border-radius: 2px;
             animation: progressShine 2s infinite;
+            box-shadow: 0 0 10px var(--glow-primary);
         }
         
         @keyframes progressShine {
-            0% { opacity: 0.5; }
+            0% { opacity: 0.6; }
             50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            100% { opacity: 0.6; }
         }
         
+        /* MAIN CONTENT */
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, rgba(20,20,30,0.8) 0%, rgba(10,10,15,0.9) 100%);
+            background: linear-gradient(135deg, rgba(15,5,24,0.9) 0%, rgba(2,6,23,0.95) 100%);
             position: relative;
         }
         
+        /* HEADER */
         .header {
-            height: 70px;
+            height: 80px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
-            background: rgba(0,0,0,0.2);
+            padding: 0 40px;
+            background: rgba(0,0,0,0.3);
         }
         
         .header-title {
-            font-size: 24px;
-            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
         }
         
         .header-actions {
@@ -303,10 +386,10 @@
         }
         
         .btn-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background: rgba(107, 33, 168, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: rgba(124, 58, 237, 0.15);
             border: 1px solid var(--border-color);
             color: var(--text-color);
             cursor: pointer;
@@ -314,25 +397,28 @@
             align-items: center;
             justify-content: center;
             transition: all var(--transition-fast);
-            font-size: 18px;
+            font-size: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
         }
         
         .btn-icon:hover {
             background: var(--primary-color);
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px var(--glow-primary);
-            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--glow-primary);
+            transform: translateY(-3px) scale(1.05);
         }
         
+        /* CONTENT AREA */
         .content-area {
             flex: 1;
-            padding: 30px;
+            padding: 40px;
             overflow-y: auto;
         }
         
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
         
         .tab-content.active {
@@ -340,18 +426,20 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* SECTIONS */
         .section {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         
         .section::before {
@@ -360,89 +448,104 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            opacity: 0.5;
+            opacity: 0.6;
+            box-shadow: 0 0 20px var(--glow-accent);
         }
         
         .section-title {
-            font-size: 14px;
-            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 2px;
             color: var(--accent-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-shadow: 0 0 15px var(--glow-accent);
         }
         
         .section-title::before {
             content: '';
-            width: 4px;
-            height: 16px;
+            width: 5px;
+            height: 20px;
             background: var(--accent-color);
-            border-radius: 2px;
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--glow-accent);
         }
         
+        /* CONTROLS */
         .control-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
         
         .control-row:last-child {
             border-bottom: none;
         }
         
+        /* TOGGLE SWITCH */
         .toggle-switch {
             position: relative;
-            width: 50px;
-            height: 26px;
+            width: 56px;
+            height: 30px;
             background: rgba(255,255,255,0.1);
-            border-radius: 13px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all var(--transition-fast);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.1);
         }
         
         .toggle-switch.active {
             background: var(--primary-color);
             border-color: var(--accent-color);
-            box-shadow: 0 0 10px var(--glow-primary);
+            box-shadow: 0 0 20px var(--glow-primary);
         }
         
         .toggle-switch::after {
             content: '';
             position: absolute;
-            top: 2px;
-            left: 2px;
+            top: 3px;
+            left: 3px;
             width: 20px;
             height: 20px;
             background: #fff;
             border-radius: 50%;
             transition: all var(--transition-fast);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
         }
         
         .toggle-switch.active::after {
-            left: 26px;
+            left: 29px;
             background: var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-color);
         }
         
+        /* SLIDERS */
         .slider-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
+            margin-top: 20px;
         }
         
         .control-label {
-            font-size: 12px;
-            font-weight: 500;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
             color: var(--text-muted);
             display: flex;
             justify-content: space-between;
@@ -450,15 +553,19 @@
         }
         
         .control-value {
+            font-family: 'Orbitron', sans-serif;
             color: var(--accent-color);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--glow-accent);
         }
         
         .slider {
             width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.08);
             outline: none;
             -webkit-appearance: none;
         }
@@ -466,113 +573,133 @@
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 18px;
-            height: 18px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--accent-color);
             cursor: pointer;
-            box-shadow: 0 0 10px var(--glow-accent);
+            box-shadow: 0 0 20px var(--glow-accent);
             transition: all var(--transition-fast);
+            border: 3px solid #fff;
         }
         
         .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 20px var(--glow-accent);
+            transform: scale(1.3);
+            box-shadow: 0 0 30px var(--glow-accent);
         }
         
+        /* SELECT DROPDOWN */
         .select-wrapper {
             position: relative;
+            margin-top: 15px;
         }
         
         .select-wrapper::after {
             content: '▼';
             position: absolute;
-            right: 12px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 10px;
+            font-size: 12px;
             color: var(--accent-color);
             pointer-events: none;
+            font-family: 'Orbitron', sans-serif;
         }
         
         select {
             width: 100%;
-            padding: 10px 35px 10px 15px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            padding: 14px 45px 14px 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             color: var(--text-color);
             font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             cursor: pointer;
             outline: none;
             transition: all var(--transition-fast);
+            text-transform: uppercase;
             appearance: none;
         }
         
         select:hover, select:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 10px var(--glow-primary);
+            box-shadow: 0 0 20px var(--glow-primary);
         }
         
+        /* COLOR PICKER */
         .color-picker-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
         
         .color-preview {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            border: 2px solid var(--border-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            border: 3px solid var(--border-color);
             cursor: pointer;
             transition: all var(--transition-fast);
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         
         .color-preview:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
             border-color: var(--accent-color);
+            box-shadow: 0 0 30px var(--glow-accent);
         }
         
         input[type="color"] {
             display: none;
         }
         
+        /* INPUT FIELDS */
         .input-field {
             width: 100%;
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             color: var(--text-color);
             font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
             outline: none;
             transition: all var(--transition-fast);
+            text-transform: uppercase;
         }
         
         .input-field:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px var(--glow-primary);
+            box-shadow: 0 0 25px var(--glow-primary);
         }
         
+        .input-field::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+        
+        /* BUTTONS */
         .btn {
-            padding: 12px 24px;
+            padding: 16px 32px;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all var(--transition-fast);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 25px rgba(124, 58, 237, 0.3);
         }
         
         .btn::before {
@@ -582,8 +709,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
         }
         
         .btn:hover::before {
@@ -591,218 +718,336 @@
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px var(--glow-primary);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px var(--glow-primary);
         }
         
         .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.08);
+            border: 2px solid var(--border-color);
+            box-shadow: none;
         }
         
         .btn-secondary:hover {
-            background: rgba(107, 33, 168, 0.3);
+            background: rgba(124, 58, 237, 0.3);
             border-color: var(--accent-color);
+            box-shadow: 0 10px 30px var(--glow-primary);
         }
         
         .btn-danger {
             background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            box-shadow: 0 5px 25px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-danger:hover {
+            box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
         }
         
         .btn-group {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             flex-wrap: wrap;
         }
         
+        .btn-small {
+            padding: 10px 18px;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+        
+        /* WEAPON GRID */
         .weapon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            max-height: 300px;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            max-height: 350px;
             overflow-y: auto;
-            padding: 5px;
+            padding: 8px;
         }
         
         .weapon-item {
-            padding: 10px;
+            padding: 14px 10px;
             background: rgba(255,255,255,0.05);
-            border: 1px solid transparent;
-            border-radius: 6px;
+            border: 2px solid transparent;
+            border-radius: 10px;
             text-align: center;
             cursor: pointer;
             transition: all var(--transition-fast);
-            font-size: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
         .weapon-item:hover {
-            background: rgba(107, 33, 168, 0.2);
+            background: rgba(124, 58, 237, 0.2);
             border-color: var(--border-color);
+            transform: translateY(-3px);
         }
         
         .weapon-item.selected {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px var(--glow-primary);
+            box-shadow: 0 0 25px var(--glow-primary);
+            transform: scale(1.05);
         }
         
+        /* HITBOX CONFIG */
         .hitbox-config {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
+            margin-top: 20px;
         }
         
         .hitbox-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
+            padding: 20px;
             background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            border: 1px solid transparent;
+            border-radius: 12px;
+            border: 2px solid transparent;
             transition: all var(--transition-fast);
         }
         
         .hitbox-item:hover {
-            background: rgba(107, 33, 168, 0.1);
+            background: rgba(124, 58, 237, 0.1);
             border-color: var(--border-color);
         }
         
         .hitbox-name {
-            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
         .hitbox-limit {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         
         .limit-input {
-            width: 60px;
+            width: 70px;
             text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
         }
         
+        /* CONFIG LIST */
         .config-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         .config-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
+            padding: 20px;
             background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
             transition: all var(--transition-fast);
         }
         
         .config-item:hover {
-            background: rgba(107, 33, 168, 0.1);
-            transform: translateX(5px);
+            background: rgba(124, 58, 237, 0.12);
+            transform: translateX(8px);
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 25px rgba(124, 58, 237, 0.2);
         }
         
         .config-name {
-            font-weight: 500;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-transform: uppercase;
         }
         
         .config-name::before {
-            content: '⚙';
+            content: '◈';
             color: var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
         }
         
         .config-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
         
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 11px;
-        }
-        
+        /* STREAM MODE */
         .stream-mode-banner {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.1) 100%);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 8px;
-            padding: 15px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.08) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .stream-mode-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
         
         .stream-icon {
-            font-size: 24px;
+            font-size: 32px;
+            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
         }
         
         .stream-text h4 {
+            font-family: 'Orbitron', sans-serif;
             color: var(--danger-color);
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
         }
         
         .stream-text p {
-            font-size: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
             color: var(--text-muted);
-            margin-top: 2px;
+            margin-top: 4px;
+            letter-spacing: 1px;
         }
         
+        /* EMPTY STATE */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             color: var(--text-muted);
         }
         
         .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            opacity: 0.5;
+            font-size: 64px;
+            margin-bottom: 25px;
+            opacity: 0.4;
+            filter: drop-shadow(0 0 20px var(--accent-color));
         }
         
+        .empty-state h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        
+        .empty-state p {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+        
+        /* SKIN INPUT */
         .skin-input-area {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
         }
         
         .skin-input-area .input-field {
             flex: 1;
         }
         
+        /* SCROLLBAR */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
         }
         
         ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
+            border-radius: 4px;
         }
         
         ::-webkit-scrollbar-thumb {
             background: var(--primary-color);
-            border-radius: 3px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--glow-primary);
         }
         
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-color);
+        }
+        
+        /* ANIMATIONS */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .tab-item {
+            animation: slideIn 0.4s ease backwards;
+        }
+        
+        .tab-item:nth-child(1) { animation-delay: 0.05s; }
+        .tab-item:nth-child(2) { animation-delay: 0.1s; }
+        .tab-item:nth-child(3) { animation-delay: 0.15s; }
+        .tab-item:nth-child(4) { animation-delay: 0.2s; }
+        .tab-item:nth-child(5) { animation-delay: 0.25s; }
+        
+        /* RAINBOW ANIMATION */
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .rainbow-active {
+            animation: rainbow 3s linear infinite;
+        }
+        
+        /* GRID LAYOUTS */
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* GLOW EFFECTS */
+        .glow-text {
+            text-shadow: 0 0 20px var(--glow-accent);
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 30px var(--glow-primary);
         }
     </style>
 </head>
@@ -816,53 +1061,53 @@
             
             <div class="tab-groups">
                 <div class="tab-group">
-                    <div class="tab-group-title">Visual</div>
+                    <div class="tab-group-title">◆ Visual ◆</div>
                     <div class="tab-item active" data-tab="esp">
-                        <span>👁</span>
+                        <span class="tab-icon">👁</span>
                         <span>ESP</span>
                     </div>
                     <div class="tab-item" data-tab="chams">
-                        <span>🎨</span>
+                        <span class="tab-icon">🎨</span>
                         <span>Chams</span>
                     </div>
                 </div>
                 
                 <div class="tab-group">
-                    <div class="tab-group-title">Combat</div>
+                    <div class="tab-group-title">◆ Combat ◆</div>
                     <div class="tab-item" data-tab="aimbot">
-                        <span>🎯</span>
+                        <span class="tab-icon">🎯</span>
                         <span>Aimbot</span>
                     </div>
                 </div>
                 
                 <div class="tab-group">
-                    <div class="tab-group-title">Misc</div>
+                    <div class="tab-group-title">◆ Misc ◆</div>
                     <div class="tab-item" data-tab="miscellaneous">
-                        <span>⚙</span>
+                        <span class="tab-icon">⚙</span>
                         <span>Miscellaneous</span>
                     </div>
                     <div class="tab-item" data-tab="configs">
-                        <span>💾</span>
+                        <span class="tab-icon">💾</span>
                         <span>Configs</span>
                     </div>
                     <div class="tab-item" data-tab="config-browser">
-                        <span>🌐</span>
+                        <span class="tab-icon">🌐</span>
                         <span>Config Browser</span>
                     </div>
                     <div class="tab-item" data-tab="skinchanger">
-                        <span>🎭</span>
+                        <span class="tab-icon">🎭</span>
                         <span>Skinchanger</span>
                     </div>
                 </div>
                 
                 <div class="tab-group">
-                    <div class="tab-group-title">Other</div>
+                    <div class="tab-group-title">◆ Other ◆</div>
                     <div class="tab-item" data-tab="chat">
-                        <span>💬</span>
+                        <span class="tab-icon">💬</span>
                         <span>Chat</span>
                     </div>
                     <div class="tab-item" data-tab="logs">
-                        <span>📋</span>
+                        <span class="tab-icon">📋</span>
                         <span>Logs</span>
                     </div>
                 </div>
@@ -877,7 +1122,7 @@
                     </div>
                 </div>
                 <div class="subscription-info">
-                    <div class="sub-label">Subscription Time Remaining</div>
+                    <div class="sub-label">◆ Subscription Time ◆</div>
                     <div class="sub-time">
                         <span>⏱</span>
                         <span id="sub-time">23d 14h 32m</span>
@@ -891,15 +1136,16 @@
         
         <main class="main-content">
             <header class="header">
-                <h1 class="header-title" id="header-title">ESP Settings</h1>
+                <h1 class="header-title" id="header-title">◆ ESP Settings ◆</h1>
                 <div class="header-actions">
-                    <button class="btn-icon">⚙</button>
-                    <button class="btn-icon">−</button>
-                    <button class="btn-icon">×</button>
+                    <button class="btn-icon" title="Settings">⚙</button>
+                    <button class="btn-icon" title="Minimize">−</button>
+                    <button class="btn-icon" title="Close">×</button>
                 </div>
             </header>
             
             <div class="content-area">
+                <!-- ESP TAB -->
                 <div class="tab-content active" id="esp">
                     <div class="section">
                         <div class="section-title">ESP Color</div>
@@ -949,6 +1195,7 @@
                     </div>
                 </div>
                 
+                <!-- CHAMS TAB -->
                 <div class="tab-content" id="chams">
                     <div class="section">
                         <div class="section-title">Chams Settings</div>
@@ -958,7 +1205,7 @@
                         </div>
                         <div class="control-row">
                             <span>Rainbow Mode</span>
-                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active'); document.querySelector('.color-preview').classList.toggle('rainbow-active')"></div>
                         </div>
                         <div class="control-row">
                             <span>Chams Color</span>
@@ -970,6 +1217,7 @@
                     </div>
                 </div>
                 
+                <!-- AIMBOT TAB -->
                 <div class="tab-content" id="aimbot">
                     <div class="section">
                         <div class="section-title">Aimbot Settings</div>
@@ -985,7 +1233,7 @@
                             <span>Visibility Check</span>
                             <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
                         </div>
-                        <div class="control-item" style="margin-top: 15px;">
+                        <div class="control-item" style="margin-top: 20px;">
                             <div class="control-label">
                                 <span>Target Bone</span>
                             </div>
@@ -1001,21 +1249,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>FOV</span>
                                 <span class="control-value" id="fov-value">90°</span>
                             </div>
                             <input type="range" class="slider" min="1" max="180" value="90" oninput="document.getElementById('fov-value').textContent = this.value + '°'">
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Smoothness</span>
                                 <span class="control-value" id="smooth-value">50</span>
                             </div>
                             <input type="range" class="slider" min="1" max="100" value="50" oninput="document.getElementById('smooth-value').textContent = this.value">
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Max Distance</span>
                                 <span class="control-value" id="distance-value">200m</span>
@@ -1030,35 +1278,35 @@
                             <span>Enabled</span>
                             <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Assist Strength</span>
                                 <span class="control-value" id="assist-value">75%</span>
                             </div>
                             <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('assist-value').textContent = this.value + '%'">
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Reaction Time</span>
                                 <span class="control-value" id="reaction-value">150ms</span>
                             </div>
                             <input type="range" class="slider" min="0" max="500" value="150" oninput="document.getElementById('reaction-value').textContent = this.value + 'ms'">
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Hand Tremor</span>
                                 <span class="control-value" id="tremor-value">10%</span>
                             </div>
                             <input type="range" class="slider" min="0" max="100" value="10" oninput="document.getElementById('tremor-value').textContent = this.value + '%'">
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Overshoot</span>
                                 <span class="control-value" id="overshoot-value">5%</span>
                             </div>
                             <input type="range" class="slider" min="0" max="50" value="5" oninput="document.getElementById('overshoot-value').textContent = this.value + '%'">
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container">
                             <div class="control-label">
                                 <span>Deadzone</span>
                                 <span class="control-value" id="deadzone-value">2px</span>
@@ -1073,25 +1321,25 @@
                             <span>Enabled</span>
                             <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
                         </div>
-                        <div class="hitbox-config" style="margin-top: 15px;">
+                        <div class="hitbox-config">
                             <div class="hitbox-item">
-                                <span class="hitbox-name">Head</span>
+                                <span class="hitbox-name">◆ Head ◆</span>
                                 <div class="hitbox-limit">
-                                    <span style="font-size: 12px; color: var(--text-muted);">Limit:</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 2px;">Limit:</span>
                                     <input type="number" class="input-field limit-input" value="20" min="0" max="20">
                                 </div>
                             </div>
                             <div class="hitbox-item">
-                                <span class="hitbox-name">Body</span>
+                                <span class="hitbox-name">◆ Body ◆</span>
                                 <div class="hitbox-limit">
-                                    <span style="font-size: 12px; color: var(--text-muted);">Limit:</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 2px;">Limit:</span>
                                     <input type="number" class="input-field limit-input" value="20" min="0" max="20">
                                 </div>
                             </div>
                             <div class="hitbox-item">
-                                <span class="hitbox-name">Leg</span>
+                                <span class="hitbox-name">◆ Leg ◆</span>
                                 <div class="hitbox-limit">
-                                    <span style="font-size: 12px; color: var(--text-muted);">Limit:</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 2px;">Limit:</span>
                                     <input type="number" class="input-field limit-input" value="20" min="0" max="20">
                                 </div>
                             </div>
@@ -1099,6 +1347,7 @@
                     </div>
                 </div>
                 
+                <!-- MISCELLANEOUS TAB -->
                 <div class="tab-content" id="miscellaneous">
                     <div class="section">
                         <div class="section-title">Misc Core</div>
@@ -1126,7 +1375,7 @@
                             <span>Speedhack</span>
                             <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
                         </div>
-                        <div class="slider-container" style="margin-top: 15px;">
+                        <div class="slider-container" style="margin-top: 20px;">
                             <div class="control-label">
                                 <span>Speedhack Multiplier</span>
                                 <span class="control-value" id="speed-value">1.0x</span>
@@ -1136,12 +1385,13 @@
                     </div>
                 </div>
                 
+                <!-- CONFIGS TAB -->
                 <div class="tab-content" id="configs">
                     <div class="stream-mode-banner">
                         <div class="stream-mode-info">
                             <span class="stream-icon">📺</span>
                             <div class="stream-text">
-                                <h4>Stream Mode</h4>
+                                <h4>◆ Stream Mode ◆</h4>
                                 <p>Hide sensitive information when streaming</p>
                             </div>
                         </div>
@@ -1150,15 +1400,15 @@
                     
                     <div class="section">
                         <div class="section-title">Config Management</div>
-                        <div class="btn-group" style="margin-bottom: 20px;">
-                            <button class="btn">Save Config</button>
-                            <button class="btn btn-secondary">Upload Config</button>
-                            <button class="btn btn-secondary">Manage Uploaded</button>
+                        <div class="btn-group" style="margin-bottom: 25px;">
+                            <button class="btn">◆ Save Config ◆</button>
+                            <button class="btn btn-secondary">◆ Upload ◆</button>
+                            <button class="btn btn-secondary">◆ Manage ◆</button>
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-secondary">Save HUD</button>
-                            <button class="btn btn-danger">Delete HUD</button>
-                            <button class="btn">Load Config</button>
+                            <button class="btn btn-secondary">◆ Save HUD ◆</button>
+                            <button class="btn btn-danger">◆ Delete HUD ◆</button>
+                            <button class="btn">◆ Load ◆</button>
                         </div>
                     </div>
                     
@@ -1168,62 +1418,64 @@
                             <div class="config-item">
                                 <span class="config-name">Default Config</span>
                                 <div class="config-actions">
-                                    <button class="btn btn-small">Load</button>
-                                    <button class="btn btn-small btn-secondary">Edit</button>
-                                    <button class="btn btn-small btn-danger">Delete</button>
+                                    <button class="btn btn-small">◆ Load ◆</button>
+                                    <button class="btn btn-small btn-secondary">◆ Edit ◆</button>
+                                    <button class="btn btn-small btn-danger">◆ Del ◆</button>
                                 </div>
                             </div>
                             <div class="config-item">
                                 <span class="config-name">Competitive Setup</span>
                                 <div class="config-actions">
-                                    <button class="btn btn-small">Load</button>
-                                    <button class="btn btn-small btn-secondary">Edit</button>
-                                    <button class="btn btn-small btn-danger">Delete</button>
+                                    <button class="btn btn-small">◆ Load ◆</button>
+                                    <button class="btn btn-small btn-secondary">◆ Edit ◆</button>
+                                    <button class="btn btn-small btn-danger">◆ Del ◆</button>
                                 </div>
                             </div>
                             <div class="config-item">
                                 <span class="config-name">Testing Profile</span>
                                 <div class="config-actions">
-                                    <button class="btn btn-small">Load</button>
-                                    <button class="btn btn-small btn-secondary">Edit</button>
-                                    <button class="btn btn-small btn-danger">Delete</button>
+                                    <button class="btn btn-small">◆ Load ◆</button>
+                                    <button class="btn btn-small btn-secondary">◆ Edit ◆</button>
+                                    <button class="btn btn-small btn-danger">◆ Del ◆</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
+                <!-- CONFIG BROWSER TAB -->
                 <div class="tab-content" id="config-browser">
                     <div class="section">
                         <div class="section-title">Public Configs</div>
-                        <button class="btn" style="margin-bottom: 20px;">🔄 Refresh Config List</button>
+                        <button class="btn" style="margin-bottom: 25px;">◆ Refresh Config List ◆</button>
                         
                         <div class="config-list">
                             <div class="config-item">
                                 <span class="config-name">Pro Player Setup v2</span>
                                 <div class="config-actions">
-                                    <button class="btn btn-small">Download</button>
-                                    <button class="btn btn-small btn-secondary">Preview</button>
+                                    <button class="btn btn-small">◆ Download ◆</button>
+                                    <button class="btn btn-small btn-secondary">◆ Preview ◆</button>
                                 </div>
                             </div>
                             <div class="config-item">
                                 <span class="config-name">Beginner Friendly</span>
                                 <div class="config-actions">
-                                    <button class="btn btn-small">Download</button>
-                                    <button class="btn btn-small btn-secondary">Preview</button>
+                                    <button class="btn btn-small">◆ Download ◆</button>
+                                    <button class="btn btn-small btn-secondary">◆ Preview ◆</button>
                                 </div>
                             </div>
                             <div class="config-item">
                                 <span class="config-name">Stream Safe Config</span>
                                 <div class="config-actions">
-                                    <button class="btn btn-small">Download</button>
-                                    <button class="btn btn-small btn-secondary">Preview</button>
+                                    <button class="btn btn-small">◆ Download ◆</button>
+                                    <button class="btn btn-small btn-secondary">◆ Preview ◆</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
+                <!-- SKINCHANGER TAB -->
                 <div class="tab-content" id="skinchanger">
                     <div class="section">
                         <div class="section-title">Skinchanger Settings</div>
@@ -1231,7 +1483,7 @@
                             <span>Enabled</span>
                             <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
                         </div>
-                        <div class="control-item" style="margin-top: 15px;">
+                        <div class="control-item" style="margin-top: 20px;">
                             <div class="control-label">
                                 <span>Weapon ID</span>
                             </div>
@@ -1282,23 +1534,25 @@
                         <div class="section-title">Add Skin</div>
                         <div class="skin-input-area">
                             <input type="text" class="input-field" placeholder="Enter Skin ID...">
-                            <button class="btn">Add Skin</button>
+                            <button class="btn">◆ Add Skin ◆</button>
                         </div>
                     </div>
                 </div>
                 
+                <!-- CHAT TAB -->
                 <div class="tab-content" id="chat">
                     <div class="empty-state">
                         <div class="empty-state-icon">💬</div>
-                        <h3>Chat System</h3>
+                        <h3>◆ Chat System ◆</h3>
                         <p>Chat functionality will be displayed here when active.</p>
                     </div>
                 </div>
                 
+                <!-- LOGS TAB -->
                 <div class="tab-content" id="logs">
                     <div class="empty-state">
                         <div class="empty-state-icon">📋</div>
-                        <h3>System Logs</h3>
+                        <h3>◆ System Logs ◆</h3>
                         <p>Activity logs and system events will appear here.</p>
                     </div>
                 </div>
@@ -1307,6 +1561,7 @@
     </div>
     
     <script>
+        // Tab Switching
         document.querySelectorAll('.tab-item').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
@@ -1318,20 +1573,21 @@
                 document.getElementById(tabId).classList.add('active');
                 
                 const titles = {
-                    'esp': 'ESP Settings',
-                    'chams': 'Chams Configuration',
-                    'aimbot': 'Aimbot Configuration',
-                    'miscellaneous': 'Miscellaneous Settings',
-                    'configs': 'Config Management',
-                    'config-browser': 'Config Browser',
-                    'skinchanger': 'Skinchanger',
-                    'chat': 'Chat System',
-                    'logs': 'System Logs'
+                    'esp': '◆ ESP Settings ◆',
+                    'chams': '◆ Chams Configuration ◆',
+                    'aimbot': '◆ Aimbot Configuration ◆',
+                    'miscellaneous': '◆ Miscellaneous Settings ◆',
+                    'configs': '◆ Config Management ◆',
+                    'config-browser': '◆ Config Browser ◆',
+                    'skinchanger': '◆ Skinchanger ◆',
+                    'chat': '◆ Chat System ◆',
+                    'logs': '◆ System Logs ◆'
                 };
                 document.getElementById('header-title').textContent = titles[tabId];
             });
         });
         
+        // Weapon Selection
         document.querySelectorAll('.weapon-item').forEach(weapon => {
             weapon.addEventListener('click', function() {
                 document.querySelectorAll('.weapon-item').forEach(w => w.classList.remove('selected'));
@@ -1339,11 +1595,28 @@
             });
         });
         
+        // Color Picker Updates
         document.querySelectorAll('input[type="color"]').forEach(picker => {
             picker.addEventListener('input', function() {
                 this.previousElementSibling.style.background = this.value;
             });
         });
+        
+        // Subscription Timer
+        function updateSubTime() {
+            const now = new Date();
+            const end = new Date(now.getTime() + (23 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000) + (32 * 60 * 1000));
+            
+            setInterval(() => {
+                const diff = end - new Date();
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('sub-time').textContent = `${days}d ${hours}h ${minutes}m`;
+            }, 60000);
+        }
+        updateSubTime();
     </script>
 </body>
 </html>
