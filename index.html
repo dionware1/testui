@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZWIN - Game Developer Menu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #6b21a8;
+            --secondary-color: #1a0b2e;
+            --accent-color: #a855f7;
+            --text-color: #e0e0e0;
+            --text-muted: #888;
+            --bg-dark: #0f0f0f;
+            --bg-panel: rgba(20, 20, 30, 0.95);
+            --border-color: rgba(107, 33, 168, 0.3);
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --glow-primary: rgba(107, 33, 168, 0.4);
+            --glow-accent: rgba(168, 85, 247, 0.3);
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--bg-dark) 50%, #000 100%);
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(107, 33, 168, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+        
+        .menu-container {
+            width: 100%;
+            max-width: 1400px;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex;
+            background: var(--bg-panel);
+            backdrop-filter: blur(20px);
+            position: relative;
+            box-shadow: 0 0 100px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, rgba(26, 11, 46, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-area {
+            padding: 30px 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--glow-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo::before {
+            content: '◆';
+            font-size: 24px;
+            -webkit-text-fill-color: var(--accent-color);
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes logoPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        .logo-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 5px;
+        }
+        
+        .tab-groups {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+        
+        .tab-group {
+            margin-bottom: 25px;
+        }
+        
+        .tab-group-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            padding: 0 25px 10px;
+            opacity: 0.8;
+        }
+        
+        .tab-item {
+            padding: 14px 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all var(--transition-fast);
+            border-left: 3px solid transparent;
+            position: relative;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tab-item:hover {
+            background: rgba(107, 33, 168, 0.1);
+            border-left-color: var(--primary-color);
+        }
+        
+        .tab-item.active {
+            background: linear-gradient(90deg, rgba(107, 33, 168, 0.2) 0%, transparent 100%);
+            border-left-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .user-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 0 15px var(--glow-primary);
+        }
+        
+        .user-details {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        
+        .user-status {
+            font-size: 11px;
+            color: var(--success-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .user-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: statusPulse 2s infinite;
+        }
+        
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .subscription-info {
+            background: rgba(107, 33, 168, 0.15);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        
+        .sub-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        
+        .sub-time {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sub-progress {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .sub-progress-bar {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes progressShine {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, rgba(20,20,30,0.8) 0%, rgba(10,10,15,0.9) 100%);
+            position: relative;
+        }
+        
+        .header {
+            height: 70px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(107, 33, 168, 0.2);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+            font-size: 18px;
+        }
+        
+        .btn-icon:hover {
+            background: var(--primary-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-primary);
+            transform: translateY(-2px);
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0.5;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .control-row:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--glow-primary);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: all var(--transition-fast);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .toggle-switch.active::after {
+            left: 26px;
+            background: var(--accent-color);
+        }
+        
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .control-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .control-value {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--glow-accent);
+            transition: all var(--transition-fast);
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px var(--glow-accent);
+        }
+        
+        .select-wrapper {
+            position: relative;
+        }
+        
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: var(--accent-color);
+            pointer-events: none;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px 35px 10px 15px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: all var(--transition-fast);
+            appearance: none;
+        }
+        
+        select:hover, select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--glow-primary);
+        }
+        
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .color-preview:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-color);
+        }
+        
+        input[type="color"] {
+            display: none;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .input-field:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-primary);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow-primary);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(107, 33, 168, 0.3);
+            border-color: var(--accent-color);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .weapon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+        
+        .weapon-item {
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .weapon-item:hover {
+            background: rgba(107, 33, 168, 0.2);
+            border-color: var(--border-color);
+        }
+        
+        .weapon-item.selected {
+            background: var(--primary-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-primary);
+        }
+        
+        .hitbox-config {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .hitbox-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+        
+        .hitbox-item:hover {
+            background: rgba(107, 33, 168, 0.1);
+            border-color: var(--border-color);
+        }
+        
+        .hitbox-name {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hitbox-limit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .limit-input {
+            width: 60px;
+            text-align: center;
+        }
+        
+        .config-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .config-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-fast);
+        }
+        
+        .config-item:hover {
+            background: rgba(107, 33, 168, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .config-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .config-name::before {
+            content: '⚙';
+            color: var(--accent-color);
+        }
+        
+        .config-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 11px;
+        }
+        
+        .stream-mode-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.1) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .stream-mode-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .stream-icon {
+            font-size: 24px;
+        }
+        
+        .stream-text h4 {
+            color: var(--danger-color);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stream-text p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        .skin-input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skin-input-area .input-field {
+            flex: 1;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo">EZWIN</div>
+                <div class="logo-subtitle">Game Dev Console</div>
+            </div>
+            
+            <div class="tab-groups">
+                <div class="tab-group">
+                    <div class="tab-group-title">Visual</div>
+                    <div class="tab-item active" data-tab="esp">
+                        <span>👁</span>
+                        <span>ESP</span>
+                    </div>
+                    <div class="tab-item" data-tab="chams">
+                        <span>🎨</span>
+                        <span>Chams</span>
+                    </div>
+                </div>
+                
+                <div class="tab-group">
+                    <div class="tab-group-title">Combat</div>
+                    <div class="tab-item" data-tab="aimbot">
+                        <span>🎯</span>
+                        <span>Aimbot</span>
+                    </div>
+                </div>
+                
+                <div class="tab-group">
+                    <div class="tab-group-title">Misc</div>
+                    <div class="tab-item" data-tab="miscellaneous">
+                        <span>⚙</span>
+                        <span>Miscellaneous</span>
+                    </div>
+                    <div class="tab-item" data-tab="configs">
+                        <span>💾</span>
+                        <span>Configs</span>
+                    </div>
+                    <div class="tab-item" data-tab="config-browser">
+                        <span>🌐</span>
+                        <span>Config Browser</span>
+                    </div>
+                    <div class="tab-item" data-tab="skinchanger">
+                        <span>🎭</span>
+                        <span>Skinchanger</span>
+                    </div>
+                </div>
+                
+                <div class="tab-group">
+                    <div class="tab-group-title">Other</div>
+                    <div class="tab-item" data-tab="chat">
+                        <span>💬</span>
+                        <span>Chat</span>
+                    </div>
+                    <div class="tab-item" data-tab="logs">
+                        <span>📋</span>
+                        <span>Logs</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="user-footer">
+                <div class="user-info">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-details">
+                        <div class="user-name">JohnDoe</div>
+                        <div class="user-status">Online</div>
+                    </div>
+                </div>
+                <div class="subscription-info">
+                    <div class="sub-label">Subscription Time Remaining</div>
+                    <div class="sub-time">
+                        <span>⏱</span>
+                        <span id="sub-time">23d 14h 32m</span>
+                    </div>
+                    <div class="sub-progress">
+                        <div class="sub-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="header">
+                <h1 class="header-title" id="header-title">ESP Settings</h1>
+                <div class="header-actions">
+                    <button class="btn-icon">⚙</button>
+                    <button class="btn-icon">−</button>
+                    <button class="btn-icon">×</button>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="tab-content active" id="esp">
+                    <div class="section">
+                        <div class="section-title">ESP Color</div>
+                        <div class="control-row">
+                            <span>ESP Color</span>
+                            <div class="color-picker-wrapper">
+                                <div class="color-preview" style="background: #a855f7;" onclick="document.getElementById('esp-color').click()"></div>
+                                <input type="color" id="esp-color" value="#a855f7">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">ESP Boxes</div>
+                        <div class="control-row">
+                            <span>Enabled</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Outline</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">ESP Features</div>
+                        <div class="control-row">
+                            <span>Health Bars</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Names</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Distance</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Bones</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Lines</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="chams">
+                    <div class="section">
+                        <div class="section-title">Chams Settings</div>
+                        <div class="control-row">
+                            <span>Enabled</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Rainbow Mode</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Chams Color</span>
+                            <div class="color-picker-wrapper">
+                                <div class="color-preview" style="background: #22c55e;" onclick="document.getElementById('chams-color').click()"></div>
+                                <input type="color" id="chams-color" value="#22c55e">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="aimbot">
+                    <div class="section">
+                        <div class="section-title">Aimbot Settings</div>
+                        <div class="control-row">
+                            <span>Enabled</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Firing Check</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Visibility Check</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-item" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Target Bone</span>
+                            </div>
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>Head</option>
+                                    <option>Spine</option>
+                                    <option>Hips</option>
+                                    <option>Left Arm</option>
+                                    <option>Right Arm</option>
+                                    <option>Left Leg</option>
+                                    <option>Right Leg</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>FOV</span>
+                                <span class="control-value" id="fov-value">90°</span>
+                            </div>
+                            <input type="range" class="slider" min="1" max="180" value="90" oninput="document.getElementById('fov-value').textContent = this.value + '°'">
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Smoothness</span>
+                                <span class="control-value" id="smooth-value">50</span>
+                            </div>
+                            <input type="range" class="slider" min="1" max="100" value="50" oninput="document.getElementById('smooth-value').textContent = this.value">
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Max Distance</span>
+                                <span class="control-value" id="distance-value">200m</span>
+                            </div>
+                            <input type="range" class="slider" min="1" max="400" value="200" oninput="document.getElementById('distance-value').textContent = this.value + 'm'">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Humanization</div>
+                        <div class="control-row">
+                            <span>Enabled</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Assist Strength</span>
+                                <span class="control-value" id="assist-value">75%</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('assist-value').textContent = this.value + '%'">
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Reaction Time</span>
+                                <span class="control-value" id="reaction-value">150ms</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="500" value="150" oninput="document.getElementById('reaction-value').textContent = this.value + 'ms'">
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Hand Tremor</span>
+                                <span class="control-value" id="tremor-value">10%</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="100" value="10" oninput="document.getElementById('tremor-value').textContent = this.value + '%'">
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Overshoot</span>
+                                <span class="control-value" id="overshoot-value">5%</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="50" value="5" oninput="document.getElementById('overshoot-value').textContent = this.value + '%'">
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Deadzone</span>
+                                <span class="control-value" id="deadzone-value">2px</span>
+                            </div>
+                            <input type="range" class="slider" min="0" max="20" value="2" oninput="document.getElementById('deadzone-value').textContent = this.value + 'px'">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Hitbox Configs</div>
+                        <div class="control-row">
+                            <span>Enabled</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="hitbox-config" style="margin-top: 15px;">
+                            <div class="hitbox-item">
+                                <span class="hitbox-name">Head</span>
+                                <div class="hitbox-limit">
+                                    <span style="font-size: 12px; color: var(--text-muted);">Limit:</span>
+                                    <input type="number" class="input-field limit-input" value="20" min="0" max="20">
+                                </div>
+                            </div>
+                            <div class="hitbox-item">
+                                <span class="hitbox-name">Body</span>
+                                <div class="hitbox-limit">
+                                    <span style="font-size: 12px; color: var(--text-muted);">Limit:</span>
+                                    <input type="number" class="input-field limit-input" value="20" min="0" max="20">
+                                </div>
+                            </div>
+                            <div class="hitbox-item">
+                                <span class="hitbox-name">Leg</span>
+                                <div class="hitbox-limit">
+                                    <span style="font-size: 12px; color: var(--text-muted);">Limit:</span>
+                                    <input type="number" class="input-field limit-input" value="20" min="0" max="20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="miscellaneous">
+                    <div class="section">
+                        <div class="section-title">Misc Core</div>
+                        <div class="control-row">
+                            <span>Team Radar</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>No Recoil</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>No Duck</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Misc Extra</div>
+                        <div class="control-row">
+                            <span>Wall Shoot</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-row">
+                            <span>Speedhack</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Speedhack Multiplier</span>
+                                <span class="control-value" id="speed-value">1.0x</span>
+                            </div>
+                            <input type="range" class="slider" min="1" max="10" step="0.1" value="1" oninput="document.getElementById('speed-value').textContent = this.value + 'x'">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="configs">
+                    <div class="stream-mode-banner">
+                        <div class="stream-mode-info">
+                            <span class="stream-icon">📺</span>
+                            <div class="stream-text">
+                                <h4>Stream Mode</h4>
+                                <p>Hide sensitive information when streaming</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Config Management</div>
+                        <div class="btn-group" style="margin-bottom: 20px;">
+                            <button class="btn">Save Config</button>
+                            <button class="btn btn-secondary">Upload Config</button>
+                            <button class="btn btn-secondary">Manage Uploaded</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary">Save HUD</button>
+                            <button class="btn btn-danger">Delete HUD</button>
+                            <button class="btn">Load Config</button>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Saved Configs</div>
+                        <div class="config-list">
+                            <div class="config-item">
+                                <span class="config-name">Default Config</span>
+                                <div class="config-actions">
+                                    <button class="btn btn-small">Load</button>
+                                    <button class="btn btn-small btn-secondary">Edit</button>
+                                    <button class="btn btn-small btn-danger">Delete</button>
+                                </div>
+                            </div>
+                            <div class="config-item">
+                                <span class="config-name">Competitive Setup</span>
+                                <div class="config-actions">
+                                    <button class="btn btn-small">Load</button>
+                                    <button class="btn btn-small btn-secondary">Edit</button>
+                                    <button class="btn btn-small btn-danger">Delete</button>
+                                </div>
+                            </div>
+                            <div class="config-item">
+                                <span class="config-name">Testing Profile</span>
+                                <div class="config-actions">
+                                    <button class="btn btn-small">Load</button>
+                                    <button class="btn btn-small btn-secondary">Edit</button>
+                                    <button class="btn btn-small btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="config-browser">
+                    <div class="section">
+                        <div class="section-title">Public Configs</div>
+                        <button class="btn" style="margin-bottom: 20px;">🔄 Refresh Config List</button>
+                        
+                        <div class="config-list">
+                            <div class="config-item">
+                                <span class="config-name">Pro Player Setup v2</span>
+                                <div class="config-actions">
+                                    <button class="btn btn-small">Download</button>
+                                    <button class="btn btn-small btn-secondary">Preview</button>
+                                </div>
+                            </div>
+                            <div class="config-item">
+                                <span class="config-name">Beginner Friendly</span>
+                                <div class="config-actions">
+                                    <button class="btn btn-small">Download</button>
+                                    <button class="btn btn-small btn-secondary">Preview</button>
+                                </div>
+                            </div>
+                            <div class="config-item">
+                                <span class="config-name">Stream Safe Config</span>
+                                <div class="config-actions">
+                                    <button class="btn btn-small">Download</button>
+                                    <button class="btn btn-small btn-secondary">Preview</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="skinchanger">
+                    <div class="section">
+                        <div class="section-title">Skinchanger Settings</div>
+                        <div class="control-row">
+                            <span>Enabled</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="control-item" style="margin-top: 15px;">
+                            <div class="control-label">
+                                <span>Weapon ID</span>
+                            </div>
+                            <input type="text" class="input-field" placeholder="Enter Weapon ID...">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Select Weapon</div>
+                        <div class="weapon-grid">
+                            <div class="weapon-item selected">Deagle</div>
+                            <div class="weapon-item">GSR1911</div>
+                            <div class="weapon-item">MR96</div>
+                            <div class="weapon-item">MTX</div>
+                            <div class="weapon-item">P250</div>
+                            <div class="weapon-item">XD45</div>
+                            <div class="weapon-item">MP5</div>
+                            <div class="weapon-item">MP7</div>
+                            <div class="weapon-item">MPX</div>
+                            <div class="weapon-item">P90</div>
+                            <div class="weapon-item">Vector</div>
+                            <div class="weapon-item">AK47</div>
+                            <div class="weapon-item">AR15</div>
+                            <div class="weapon-item">AUG</div>
+                            <div class="weapon-item">HK417</div>
+                            <div class="weapon-item">M4</div>
+                            <div class="weapon-item">SA58</div>
+                            <div class="weapon-item">SG551</div>
+                            <div class="weapon-item">SCARH</div>
+                            <div class="weapon-item">FP6</div>
+                            <div class="weapon-item">Super90</div>
+                            <div class="weapon-item">Winchester</div>
+                            <div class="weapon-item">KSG</div>
+                            <div class="weapon-item">M14</div>
+                            <div class="weapon-item">SVD</div>
+                            <div class="weapon-item">TRG</div>
+                            <div class="weapon-item">URatio</div>
+                            <div class="weapon-item">Empty Hands</div>
+                            <div class="weapon-item">Knife</div>
+                            <div class="weapon-item">Flashbang</div>
+                            <div class="weapon-item">Frag</div>
+                            <div class="weapon-item">Smoke Grenade</div>
+                            <div class="weapon-item">Gloves</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Add Skin</div>
+                        <div class="skin-input-area">
+                            <input type="text" class="input-field" placeholder="Enter Skin ID...">
+                            <button class="btn">Add Skin</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="chat">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💬</div>
+                        <h3>Chat System</h3>
+                        <p>Chat functionality will be displayed here when active.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="logs">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <h3>System Logs</h3>
+                        <p>Activity logs and system events will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                const titles = {
+                    'esp': 'ESP Settings',
+                    'chams': 'Chams Configuration',
+                    'aimbot': 'Aimbot Configuration',
+                    'miscellaneous': 'Miscellaneous Settings',
+                    'configs': 'Config Management',
+                    'config-browser': 'Config Browser',
+                    'skinchanger': 'Skinchanger',
+                    'chat': 'Chat System',
+                    'logs': 'System Logs'
+                };
+                document.getElementById('header-title').textContent = titles[tabId];
+            });
+        });
+        
+        document.querySelectorAll('.weapon-item').forEach(weapon => {
+            weapon.addEventListener('click', function() {
+                document.querySelectorAll('.weapon-item').forEach(w => w.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        document.querySelectorAll('input[type="color"]').forEach(picker => {
+            picker.addEventListener('input', function() {
+                this.previousElementSibling.style.background = this.value;
+            });
+        });
+    </script>
+</body>
+</html>
