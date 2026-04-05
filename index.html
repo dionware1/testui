@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EZWIN - Game Developer Menu</title>
-    
+    <title>EZWIN</title>
     <style>
         * {
             margin: 0;
@@ -13,144 +12,140 @@
         }
         
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #1e1b4b;
-            --dark: #0f0f1a;
-            --darker: #0a0a12;
-            --light: #e2e8f0;
-            --muted: #94a3b8;
-            --border: rgba(99, 102, 241, 0.2);
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #f59e0b;
+            --bg: #0a0a0f;
+            --panel: #12121a;
+            --panel-light: #1a1a25;
+            --border: #2a2a3a;
+            --accent: #ff4757;
+            --accent-glow: rgba(255, 71, 87, 0.3);
+            --text: #ffffff;
+            --text-dim: #8b8b9f;
+            --success: #2ed573;
+            --warning: #ffa502;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-weight: 600;
-            background: var(--darker);
-            min-height: 100vh;
-            color: var(--light);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 800;
+            background: var(--bg);
+            color: var(--text);
             overflow: hidden;
+            width: 100vw;
+            height: 100vh;
         }
         
-        .menu-container {
-            width: 100%;
-            max-width: 1400px;
-            height: 100vh;
-            margin: 0 auto;
+        .menu {
+            width: 1280px;
+            height: 800px;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--panel);
             display: flex;
-            background: var(--dark);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
         }
         
         /* SIDEBAR */
         .sidebar {
-            width: 280px;
-            background: var(--secondary);
-            border-right: 1px solid var(--border);
+            width: 240px;
+            background: var(--bg);
+            border-right: 2px solid var(--border);
             display: flex;
             flex-direction: column;
         }
         
-        .logo-area {
-            padding: 25px;
-            border-bottom: 1px solid var(--border);
+        .logo-wrap {
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--darker);
+            border-bottom: 2px solid var(--border);
+            background: linear-gradient(180deg, rgba(255,71,87,0.1) 0%, transparent 100%);
         }
         
-        .logo-img {
-            width: 180px;
+        .logo {
+            width: 160px;
             height: auto;
-            filter: brightness(1.1);
+            filter: drop-shadow(0 0 20px var(--accent-glow));
         }
         
-        .tab-groups {
+        .tabs {
             flex: 1;
-            overflow-y: auto;
-            padding: 20px 0;
+            padding: 15px 0;
+            overflow: hidden;
         }
         
-        .tab-group {
-            margin-bottom: 25px;
+        .tab-grp {
+            margin-bottom: 12px;
         }
         
-        .tab-group-title {
-            font-size: 10px;
-            font-weight: 700;
+        .tab-grp-title {
+            font-size: 9px;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--primary);
-            padding: 0 25px 10px;
+            color: var(--accent);
+            padding: 0 20px 8px;
             opacity: 0.8;
         }
         
-        .tab-item {
-            font-size: 13px;
-            font-weight: 600;
-            padding: 12px 25px;
+        .tab {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: all 0.15s ease;
+            gap: 10px;
+            color: var(--text-dim);
             border-left: 3px solid transparent;
-            color: var(--muted);
+            transition: all 0.1s;
         }
         
-        .tab-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--light);
+        .tab:hover, .tab.active {
+            background: var(--panel-light);
+            color: var(--text);
+            border-left-color: var(--accent);
         }
         
-        .tab-item.active {
-            background: rgba(99, 102, 241, 0.15);
-            border-left-color: var(--primary);
-            color: var(--light);
+        .user-box {
+            padding: 15px 20px;
+            border-top: 2px solid var(--border);
+            background: var(--panel-light);
         }
         
-        .tab-icon {
-            font-size: 16px;
-        }
-        
-        /* USER FOOTER */
-        .user-footer {
-            padding: 20px 25px;
-            border-top: 1px solid var(--border);
-            background: var(--darker);
-        }
-        
-        .user-info {
+        .user-row {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background: var(--primary);
+        .user-av {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
             font-size: 14px;
+            font-weight: 900;
         }
         
         .user-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--light);
+            font-size: 13px;
+            font-weight: 800;
         }
         
         .user-status {
-            font-size: 11px;
+            font-size: 10px;
+            font-weight: 700;
             color: var(--success);
             display: flex;
             align-items: center;
@@ -165,256 +160,244 @@
             border-radius: 50%;
         }
         
-        .subscription-box {
-            background: rgba(99, 102, 241, 0.1);
+        .sub-box {
+            background: rgba(255,71,87,0.1);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 12px;
+            border-radius: 4px;
+            padding: 10px;
         }
         
         .sub-label {
-            font-size: 9px;
-            font-weight: 700;
+            font-size: 8px;
+            font-weight: 900;
             text-transform: uppercase;
+            color: var(--text-dim);
             letter-spacing: 1px;
-            color: var(--muted);
-            margin-bottom: 6px;
         }
         
         .sub-time {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--accent);
+            margin-top: 4px;
         }
         
         .sub-bar {
-            width: 100%;
             height: 3px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
+            background: var(--border);
             margin-top: 8px;
-            overflow: hidden;
+            border-radius: 2px;
         }
         
         .sub-fill {
-            height: 100%;
             width: 75%;
-            background: var(--primary);
+            height: 100%;
+            background: var(--accent);
             border-radius: 2px;
         }
         
-        /* MAIN CONTENT */
-        .main-content {
+        /* MAIN */
+        .main {
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: var(--dark);
+            overflow: hidden;
         }
         
         .header {
-            height: 65px;
-            border-bottom: 1px solid var(--border);
+            height: 60px;
+            background: var(--bg);
+            border-bottom: 2px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
-            background: var(--darker);
+            padding: 0 25px;
         }
         
         .header-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--light);
+            font-size: 18px;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
         
-        .header-actions {
+        .header-btns {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
-            background: transparent;
+        .h-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--panel-light);
             border: 1px solid var(--border);
-            color: var(--muted);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: var(--text);
             font-size: 16px;
             font-weight: 700;
-            transition: all 0.15s ease;
+            cursor: pointer;
+            border-radius: 4px;
         }
         
-        .btn-icon:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
+        .h-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
         }
         
-        .content-area {
+        .content {
             flex: 1;
-            padding: 30px;
-            overflow-y: auto;
+            padding: 20px;
+            overflow: hidden;
         }
         
-        .tab-content {
+        .page {
             display: none;
+            height: 100%;
         }
         
-        .tab-content.active {
+        .page.active {
             display: block;
         }
         
-        /* SECTIONS */
-        .section {
-            background: var(--darker);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 25px;
+        /* GRID LAYOUT */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            height: 100%;
         }
         
-        .section-title {
-            font-size: 12px;
-            font-weight: 700;
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            height: 100%;
+        }
+        
+        .col {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden;
+        }
+        
+        /* BOX */
+        .box {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            padding: 15px;
+        }
+        
+        .box-title {
+            font-size: 11px;
+            font-weight: 900;
             text-transform: uppercase;
+            color: var(--accent);
             letter-spacing: 1px;
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border);
         }
         
-        .control-row {
+        /* CONTROLS */
+        .row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 13px;
-            font-weight: 600;
+            padding: 8px 0;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .control-row:last-child {
-            border-bottom: none;
+        .row:not(:last-child) {
+            border-bottom: 1px solid var(--border);
         }
         
-        /* TOGGLE */
         .toggle {
-            width: 48px;
-            height: 26px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 13px;
+            width: 44px;
+            height: 22px;
+            background: var(--border);
+            border-radius: 11px;
             cursor: pointer;
             position: relative;
-            transition: all 0.15s ease;
+            transition: 0.15s;
         }
         
-        .toggle.active {
-            background: var(--primary);
+        .toggle.on {
+            background: var(--accent);
         }
         
         .toggle::after {
             content: '';
             position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 20px;
-            height: 20px;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
             background: white;
             border-radius: 50%;
-            transition: all 0.15s ease;
+            transition: 0.15s;
         }
         
-        .toggle.active::after {
-            left: 25px;
+        .toggle.on::after {
+            left: 24px;
         }
         
-        /* SLIDER */
-        .slider-wrap {
-            margin-top: 15px;
+        .slider-box {
+            margin-top: 10px;
         }
         
-        .slider-label {
+        .slider-top {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 800;
             text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
         }
         
         .slider-val {
-            color: var(--primary);
+            color: var(--accent);
         }
         
         .slider {
             width: 100%;
             height: 6px;
+            background: var(--border);
             border-radius: 3px;
-            background: rgba(255,255,255,0.1);
             outline: none;
             -webkit-appearance: none;
         }
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
             border-radius: 50%;
-            background: var(--primary);
             cursor: pointer;
             border: 2px solid white;
         }
         
-        /* SELECT */
-        .select-box {
-            position: relative;
-            margin-top: 15px;
-        }
-        
-        .select-box::after {
-            content: '▼';
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: var(--primary);
-            pointer-events: none;
-        }
-        
-        select {
+        select, input[type="text"], input[type="number"] {
             width: 100%;
-            padding: 12px 35px 12px 15px;
-            background: rgba(0,0,0,0.3);
+            padding: 8px 10px;
+            background: var(--panel-light);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--light);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            appearance: none;
+            color: var(--text);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-top: 8px;
         }
         
-        /* COLOR PICKER */
-        .color-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .color-box {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
+        .color-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
             border: 2px solid var(--border);
             cursor: pointer;
         }
@@ -423,201 +406,184 @@
             display: none;
         }
         
-        /* INPUT */
-        .input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--light);
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        .input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        /* BUTTONS */
         .btn {
-            padding: 12px 24px;
-            background: var(--primary);
+            padding: 8px 16px;
+            background: var(--accent);
             border: none;
-            border-radius: 6px;
             color: white;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.15s ease;
-        }
-        
-        .btn:hover {
-            background: var(--primary-dark);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--light);
-        }
-        
-        .btn-outline:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--primary);
-        }
-        
-        .btn-red {
-            background: var(--danger);
-        }
-        
-        .btn-red:hover {
-            background: #dc2626;
+            border-radius: 4px;
         }
         
         .btn-sm {
-            padding: 8px 16px;
-            font-size: 11px;
+            padding: 6px 12px;
+            font-size: 9px;
         }
         
-        .btn-group {
+        .btn-line {
+            background: transparent;
+            border: 1px solid var(--border);
+        }
+        
+        .btn-bad {
+            background: #ff3838;
+        }
+        
+        .btn-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
+            margin-top: 10px;
         }
         
         /* WEAPON GRID */
-        .weapon-grid {
+        .wep-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 8px;
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 5px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            max-height: 200px;
         }
         
-        .weapon-item {
-            padding: 10px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid transparent;
-            border-radius: 6px;
+        .wep {
+            padding: 8px 4px;
+            background: var(--panel-light);
+            border: 1px solid var(--border);
             text-align: center;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 9px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.15s ease;
+            cursor: pointer;
+            border-radius: 3px;
         }
         
-        .weapon-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--border);
+        .wep:hover, .wep.on {
+            background: var(--accent);
+            border-color: var(--accent);
         }
         
-        .weapon-item.active {
-            background: var(--primary);
-            border-color: var(--primary);
+        /* CHECK GRID */
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
         
-        /* HITBOX */
-        .hitbox-list {
+        .check {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
         }
         
-        .hitbox-item {
+        .check input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+        }
+        
+        /* MATERIAL GRID */
+        .mat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+        
+        .mat {
+            padding: 10px;
+            background: var(--panel-light);
+            border: 1px solid var(--border);
+            text-align: center;
+            font-size: 9px;
+            font-weight: 800;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        
+        .mat:hover, .mat.on {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        /* HITBOX ROWS */
+        .hb-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 6px;
+            padding: 10px;
+            background: var(--panel-light);
+            margin-bottom: 6px;
+            border-radius: 4px;
         }
         
-        .hitbox-name {
-            font-weight: 700;
-            font-size: 13px;
+        .hb-name {
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
-        .hitbox-input {
+        .hb-input {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
-        .hitbox-input span {
-            font-size: 11px;
-            color: var(--muted);
-            font-weight: 600;
+        .hb-input span {
+            font-size: 9px;
+            color: var(--text-dim);
         }
         
-        .num-input {
-            width: 60px;
+        .hb-input input {
+            width: 50px;
+            margin: 0;
             text-align: center;
-            padding: 8px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--light);
-            font-weight: 700;
         }
         
         /* CONFIG LIST */
-        .config-list {
+        .cfg-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-        
-        .config-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-        }
-        
-        .config-name {
-            font-weight: 700;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .config-name::before {
-            content: '⚙';
-            color: var(--primary);
-        }
-        
-        .config-actions {
-            display: flex;
             gap: 8px;
         }
         
-        /* STREAM MODE */
-        .stream-banner {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 6px;
-            padding: 16px;
+        .cfg-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 25px;
+            padding: 12px;
+            background: var(--panel-light);
+            border: 1px solid var(--border);
+            border-radius: 4px;
         }
         
-        .stream-info {
+        .cfg-name {
+            font-size: 11px;
+            font-weight: 800;
+        }
+        
+        .cfg-btns {
+            display: flex;
+            gap: 6px;
+        }
+        
+        /* STREAM BANNER */
+        .stream-ban {
+            background: rgba(255, 56, 56, 0.1);
+            border: 1px solid rgba(255, 56, 56, 0.3);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .stream-l {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -627,580 +593,866 @@
             font-size: 24px;
         }
         
-        .stream-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--danger);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .stream-t {
+            font-size: 13px;
+            font-weight: 900;
+            color: #ff3838;
         }
         
-        .stream-desc {
-            font-size: 12px;
-            color: var(--muted);
+        .stream-d {
+            font-size: 10px;
+            color: var(--text-dim);
             margin-top: 2px;
         }
         
-        /* EMPTY STATE */
+        /* EMPTY */
         .empty {
             text-align: center;
-            padding: 80px 20px;
-            color: var(--muted);
+            padding: 100px 20px;
+            color: var(--text-dim);
         }
         
-        .empty-icon {
+        .empty i {
             font-size: 48px;
             margin-bottom: 20px;
-            opacity: 0.5;
+            display: block;
         }
         
         .empty h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--light);
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--text);
             margin-bottom: 10px;
         }
         
         /* INPUT ROW */
-        .input-row {
+        .inp-row {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
         }
         
-        .input-row .input {
+        .inp-row input {
             flex: 1;
+            margin: 0;
         }
         
-        /* SCROLLBAR */
+        /* SCROLLBAR HIDE */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 4px;
         }
         
         ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.2);
+            background: transparent;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 3px;
+            background: var(--accent);
+            border-radius: 2px;
         }
         
-        /* HIDE AI LOOK */
-        .section, .tab-item, .btn, .control-row {
-            transform: none !important;
-            backdrop-filter: none !important;
-        }
-        
-        * {
-            text-shadow: none !important;
-            box-shadow: none !important;
-        }
-        
-        .btn:hover, .tab-item:hover, .weapon-item:hover {
-            transform: translateY(-1px);
-        }
-        
-        .toggle.active, .weapon-item.active {
-            box-shadow: 0 0 0 2px var(--primary-dark) !important;
+        .col-scroll {
+            overflow-y: auto;
+            padding-right: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="menu-container">
+    <div class="menu">
         <aside class="sidebar">
-            <div class="logo-area">
-                <img src="https://i.ibb.co/zVtrhQF0/ezwinlogo-removebg-preview.png" alt="EZWIN" class="logo-img">
+            <div class="logo-wrap">
+                <img src="https://i.ibb.co/zVtrhQF0/ezwinlogo-removebg-preview.png" class="logo" alt="EZWIN">
             </div>
             
-            <div class="tab-groups">
-                <div class="tab-group">
-                    <div class="tab-group-title">Visual</div>
-                    <div class="tab-item active" data-tab="esp">
-                        <span class="tab-icon">👁</span>
-                        <span>ESP</span>
-                    </div>
-                    <div class="tab-item" data-tab="chams">
-                        <span class="tab-icon">🎨</span>
-                        <span>Chams</span>
-                    </div>
+            <div class="tabs">
+                <div class="tab-grp">
+                    <div class="tab-grp-title">Combat</div>
+                    <div class="tab active" data-page="ragebot">Ragebot</div>
+                    <div class="tab" data-page="antiaim">AntiAim</div>
+                    <div class="tab" data-page="legit">Legitbot</div>
                 </div>
                 
-                <div class="tab-group">
-                    <div class="tab-group-title">Combat</div>
-                    <div class="tab-item" data-tab="aimbot">
-                        <span class="tab-icon">🎯</span>
-                        <span>Aimbot</span>
-                    </div>
+                <div class="tab-grp">
+                    <div class="tab-grp-title">Visual</div>
+                    <div class="tab" data-page="visual">Player ESP</div>
+                    <div class="tab" data-page="world">World Visuals</div>
+                    <div class="tab" data-page="chams">Chams</div>
                 </div>
                 
-                <div class="tab-group">
-                    <div class="tab-group-title">Misc</div>
-                    <div class="tab-item" data-tab="misc">
-                        <span class="tab-icon">⚙</span>
-                        <span>Miscellaneous</span>
-                    </div>
-                    <div class="tab-item" data-tab="configs">
-                        <span class="tab-icon">💾</span>
-                        <span>Configs</span>
-                    </div>
-                    <div class="tab-item" data-tab="browser">
-                        <span class="tab-icon">🌐</span>
-                        <span>Config Browser</span>
-                    </div>
-                    <div class="tab-item" data-tab="skins">
-                        <span class="tab-icon">🎭</span>
-                        <span>Skinchanger</span>
-                    </div>
-                </div>
-                
-                <div class="tab-group">
-                    <div class="tab-group-title">Other</div>
-                    <div class="tab-item" data-tab="chat">
-                        <span class="tab-icon">💬</span>
-                        <span>Chat</span>
-                    </div>
-                    <div class="tab-item" data-tab="logs">
-                        <span class="tab-icon">📋</span>
-                        <span>Logs</span>
-                    </div>
+                <div class="tab-grp">
+                    <div class="tab-grp-title">Settings</div>
+                    <div class="tab" data-page="misc">Misc</div>
+                    <div class="tab" data-page="configs">Configs</div>
+                    <div class="tab" data-page="skins">Skins</div>
                 </div>
             </div>
             
-            <div class="user-footer">
-                <div class="user-info">
-                    <div class="user-avatar">JD</div>
+            <div class="user-box">
+                <div class="user-row">
+                    <div class="user-av">JD</div>
                     <div>
                         <div class="user-name">JohnDoe</div>
                         <div class="user-status">Online</div>
                     </div>
                 </div>
-                <div class="subscription-box">
-                    <div class="sub-label">Subscription Time</div>
-                    <div class="sub-time" id="sub-time">23d 14h 32m</div>
-                    <div class="sub-bar">
-                        <div class="sub-fill"></div>
-                    </div>
+                <div class="sub-box">
+                    <div class="sub-label">Subscription</div>
+                    <div class="sub-time">23d 14h 32m</div>
+                    <div class="sub-bar"><div class="sub-fill"></div></div>
                 </div>
             </div>
         </aside>
         
-        <main class="main-content">
+        <main class="main">
             <header class="header">
-                <h1 class="header-title" id="header-title">ESP Settings</h1>
-                <div class="header-actions">
-                    <button class="btn-icon">⚙</button>
-                    <button class="btn-icon">−</button>
-                    <button class="btn-icon">×</button>
+                <h1 class="header-title" id="page-title">Ragebot</h1>
+                <div class="header-btns">
+                    <button class="h-btn">⚙</button>
+                    <button class="h-btn">−</button>
+                    <button class="h-btn">×</button>
                 </div>
             </header>
             
-            <div class="content-area">
-                <!-- ESP -->
-                <div class="tab-content active" id="esp">
-                    <div class="section">
-                        <div class="section-title">ESP Color</div>
-                        <div class="control-row">
-                            <span>ESP Color</span>
-                            <div class="color-wrap">
-                                <div class="color-box" style="background: #6366f1;" onclick="document.getElementById('esp-color').click()"></div>
-                                <input type="color" id="esp-color" value="#6366f1">
+            <div class="content">
+                <!-- RAGEBOT -->
+                <div class="page active" id="ragebot">
+                    <div class="grid-3">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Main</div>
+                                <div class="row"><span>Auto Fire</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Double Tap</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Force Shoot</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Force Baim</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Auto Knife</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Auto Backstab</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Delay Shot</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Accuracy</div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Hitchance</span><span class="slider-val" id="hc-val">75%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('hc-val').textContent=this.value+'%'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Mindamage</span><span class="slider-val" id="md-val">20</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="20" oninput="document.getElementById('md-val').textContent=this.value">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Pointscale</span><span class="slider-val" id="ps-val">0.5</span></div>
+                                    <input type="range" class="slider" min="0" max="1" step="0.01" value="0.5" oninput="document.getElementById('ps-val').textContent=this.value">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Hitbox Selection</div>
+                                <div class="check-grid">
+                                    <label class="check"><input type="checkbox" checked> Head</label>
+                                    <label class="check"><input type="checkbox" checked> Neck</label>
+                                    <label class="check"><input type="checkbox" checked> Chest</label>
+                                    <label class="check"><input type="checkbox"> Stomach</label>
+                                    <label class="check"><input type="checkbox"> Pelvis</label>
+                                    <label class="check"><input type="checkbox"> Arms</label>
+                                    <label class="check"><input type="checkbox"> Legs</label>
+                                    <label class="check"><input type="checkbox"> Feet</label>
+                                </div>
+                                <div class="row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+                                    <span>Multipoint</span><div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Target Priority</div>
+                                <select>
+                                    <option>Distance</option>
+                                    <option>Health</option>
+                                    <option>Threat</option>
+                                    <option>Crosshair</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Double Tap Speed</div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Shift Amount</span><span class="slider-val" id="dt-val">14</span></div>
+                                    <input type="range" class="slider" min="0" max="20" value="14" oninput="document.getElementById('dt-val').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Exploits</div>
+                                <div class="row"><span>Hide Shots</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Anti Defensive</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="section">
-                        <div class="section-title">ESP Boxes</div>
-                        <div class="control-row">
-                            <span>Enabled</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                
+                <!-- ANTIAIM -->
+                <div class="page" id="antiaim">
+                    <div class="grid-3">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Pitch</div>
+                                <select>
+                                    <option>Off</option>
+                                    <option>Down</option>
+                                    <option>Up</option>
+                                    <option>Minimal</option>
+                                    <option>Random</option>
+                                </select>
+                                <div class="row" style="margin-top:10px"><span>Jitter</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Yaw Base</div>
+                                <select>
+                                    <option>View</option>
+                                    <option>At Target</option>
+                                    <option>Velocity</option>
+                                    <option>Freestanding</option>
+                                    <option>Reverse Freestanding</option>
+                                </select>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Yaw</div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Add</span><span class="slider-val" id="yaw-add">0°</span></div>
+                                    <input type="range" class="slider" min="-180" max="180" value="0" oninput="document.getElementById('yaw-add').textContent=this.value+'°'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Jitter</span><span class="slider-val" id="yaw-jit">0°</span></div>
+                                    <input type="range" class="slider" min="0" max="180" value="0" oninput="document.getElementById('yaw-jit').textContent=this.value+'°'">
+                                </div>
+                            </div>
                         </div>
-                        <div class="control-row">
-                            <span>Outline</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Desync</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Amount</span><span class="slider-val" id="ds-amt">60%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="60" oninput="document.getElementById('ds-amt').textContent=this.value+'%'">
+                                </div>
+                                <select style="margin-top:10px">
+                                    <option>Opposite</option>
+                                    <option>Jitter</option>
+                                    <option>Random</option>
+                                    <option>Freestanding</option>
+                                </select>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Fakelag</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Limit</span><span class="slider-val" id="fl-lim">14</span></div>
+                                    <input type="range" class="slider" min="1" max="14" value="14" oninput="document.getElementById('fl-lim').textContent=this.value">
+                                </div>
+                                <div class="row" style="margin-top:10px"><span>While Shooting</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Spin</div>
+                                <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Speed</span><span class="slider-val" id="spin-spd">360°/s</span></div>
+                                    <input type="range" class="slider" min="0" max="1080" value="360" oninput="document.getElementById('spin-spd').textContent=this.value+'°/s'">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Manual Override</div>
+                                <div class="btn-row">
+                                    <button class="btn btn-sm btn-line">← Left</button>
+                                    <button class="btn btn-sm btn-line">→ Right</button>
+                                </div>
+                                <div class="btn-row">
+                                    <button class="btn btn-sm btn-line">↑ Back</button>
+                                    <button class="btn btn-sm btn-line">↓ Forward</button>
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Other</div>
+                                <div class="row"><span>Hide Shot</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>On Shot AntiAim</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Edge Yaw</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="section">
-                        <div class="section-title">ESP Features</div>
-                        <div class="control-row">
-                            <span>Health Bars</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                
+                <!-- LEGITBOT -->
+                <div class="page" id="legit">
+                    <div class="grid-2">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Aimbot Settings</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Visibility Check</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <select style="margin-top:10px">
+                                    <option>Head</option>
+                                    <option>Neck</option>
+                                    <option>Chest</option>
+                                    <option>Stomach</option>
+                                </select>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>FOV</span><span class="slider-val" id="legit-fov">10°</span></div>
+                                    <input type="range" class="slider" min="1" max="30" value="10" oninput="document.getElementById('legit-fov').textContent=this.value+'°'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Smooth</span><span class="slider-val" id="legit-smooth">5.0</span></div>
+                                    <input type="range" class="slider" min="1" max="20" step="0.1" value="5" oninput="document.getElementById('legit-smooth').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">RCS</div>
+                                <div class="row"><span>Standalone</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>X Axis</span><span class="slider-val" id="rcs-x">100%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="100" oninput="document.getElementById('rcs-x').textContent=this.value+'%'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Y Axis</span><span class="slider-val" id="rcs-y">100%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="100" oninput="document.getElementById('rcs-y').textContent=this.value+'%'">
+                                </div>
+                            </div>
                         </div>
-                        <div class="control-row">
-                            <span>Names</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Triggerbot</div>
+                                <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Magnet</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Delay</span><span class="slider-val" id="trig-del">0ms</span></div>
+                                    <input type="range" class="slider" min="0" max="500" value="0" oninput="document.getElementById('trig-del').textContent=this.value+'ms'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Burst</span><span class="slider-val" id="trig-burst">1</span></div>
+                                    <input type="range" class="slider" min="1" max="10" value="1" oninput="document.getElementById('trig-burst').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Backtrack</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Time</span><span class="slider-val" id="bt-time">200ms</span></div>
+                                    <input type="range" class="slider" min="0" max="200" value="200" oninput="document.getElementById('bt-time').textContent=this.value+'ms'">
+                                </div>
+                            </div>
                         </div>
-                        <div class="control-row">
-                            <span>Distance</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                    </div>
+                </div>
+                
+                <!-- VISUAL -->
+                <div class="page" id="visual">
+                    <div class="grid-3">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Camera</div>
+                                <div class="row"><span>Thirdperson</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Distance</span><span class="slider-val" id="tp-dist">120</span></div>
+                                    <input type="range" class="slider" min="50" max="200" value="120" oninput="document.getElementById('tp-dist').textContent=this.value">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>FOV Override</span><span class="slider-val" id="fov-ov">90°</span></div>
+                                    <input type="range" class="slider" min="60" max="140" value="90" oninput="document.getElementById('fov-ov').textContent=this.value+'°'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Viewmodel FOV</span><span class="slider-val" id="vm-fov">68°</span></div>
+                                    <input type="range" class="slider" min="50" max="90" value="68" oninput="document.getElementById('vm-fov').textContent=this.value+'°'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Aspect Ratio</span><span class="slider-val" id="aspect">0.00</span></div>
+                                    <input type="range" class="slider" min="0" max="2" step="0.01" value="0" oninput="document.getElementById('aspect').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Scope</div>
+                                <div class="row"><span>Remove Scope</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Force Crosshair</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Gradient Scope</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
                         </div>
-                        <div class="control-row">
-                            <span>Bones</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Bullet Tracers</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="color-btn" style="background:#ff4757;display:inline-block;vertical-align:middle;margin-left:10px" onclick="document.getElementById('tracer-col').click()"></div>
+                                <input type="color" id="tracer-col" value="#ff4757">
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Duration</span><span class="slider-val" id="tracer-dur">2.0s</span></div>
+                                    <input type="range" class="slider" min="0.5" max="10" step="0.1" value="2" oninput="document.getElementById('tracer-dur').textContent=this.value+'s'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Opacity</span><span class="slider-val" id="tracer-op">100%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="100" oninput="document.getElementById('tracer-op').textContent=this.value+'%'">
+                                </div>
+                                <div class="row" style="margin-top:10px"><span>Local Only</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Glow</div>
+                                <div class="row"><span>Players</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Weapons</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>C4</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Bloom</span><span class="slider-val" id="glow-bloom">3</span></div>
+                                    <input type="range" class="slider" min="1" max="10" value="3" oninput="document.getElementById('glow-bloom').textContent=this.value">
+                                </div>
+                            </div>
                         </div>
-                        <div class="control-row">
-                            <span>Lines</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Removals</div>
+                                <div class="row"><span>No Smoke</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>No Flash</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>No Scope Zoom</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>No View Punch</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>No Aim Punch</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Chams Materials</div>
+                                <div class="mat-grid">
+                                    <div class="mat on">Flat</div>
+                                    <div class="mat">Color</div>
+                                    <div class="mat">Metallic</div>
+                                    <div class="mat">Glow</div>
+                                    <div class="mat">Pearlescent</div>
+                                    <div class="mat">Glass</div>
+                                </div>
+                                <div class="color-btn" style="background:#ff4757;margin-top:10px" onclick="document.getElementById('cham-vis').click()"></div>
+                                <input type="color" id="cham-vis" value="#ff4757">
+                                <span style="font-size:10px;color:var(--text-dim);margin-left:8px">Visible</span>
+                                <div class="color-btn" style="background:#2ed573;margin-top:8px" onclick="document.getElementById('cham-xvis').click()"></div>
+                                <input type="color" id="cham-xvis" value="#2ed573">
+                                <span style="font-size:10px;color:var(--text-dim);margin-left:8px">X-Visible</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- WORLD VISUALS -->
+                <div class="page" id="world">
+                    <div class="grid-2">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Item ESP</div>
+                                <div class="row"><span>Weapons</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Grenades</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>C4</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Defuse Kit</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Armor</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Max Distance</span><span class="slider-val" id="item-dist">1000</span></div>
+                                    <input type="range" class="slider" min="100" max="3000" value="1000" oninput="document.getElementById('item-dist').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Environment</div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Exposure</span><span class="slider-val" id="exposure">1.0</span></div>
+                                    <input type="range" class="slider" min="0.1" max="3" step="0.1" value="1" oninput="document.getElementById('exposure').textContent=this.value">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Fog Density</span><span class="slider-val" id="fog">0%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="0" oninput="document.getElementById('fog').textContent=this.value+'%'">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Brightness</span><span class="slider-val" id="bright">100%</span></div>
+                                    <input type="range" class="slider" min="50" max="200" value="100" oninput="document.getElementById('bright').textContent=this.value+'%'">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">World Effects</div>
+                                <div class="row"><span>Snow</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Rain</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Ash Rain</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Lightning</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Intensity</span><span class="slider-val" id="weather-int">50%</span></div>
+                                    <input type="range" class="slider" min="0" max="100" value="50" oninput="document.getElementById('weather-int').textContent=this.value+'%'">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Sky Changer (Doppler)</div>
+                                <div style="display:flex;gap:10px;margin-bottom:10px">
+                                    <div class="color-btn" style="background:#ff0066;flex:1;height:40px" onclick="document.getElementById('sky1').click()"></div>
+                                    <input type="color" id="sky1" value="#ff0066">
+                                    <div class="color-btn" style="background:#6600ff;flex:1;height:40px" onclick="document.getElementById('sky2').click()"></div>
+                                    <input type="color" id="sky2" value="#6600ff">
+                                    <div class="color-btn" style="background:#00ffff;flex:1;height:40px" onclick="document.getElementById('sky3').click()"></div>
+                                    <input type="color" id="sky3" value="#00ffff">
+                                </div>
+                                <div class="row"><span>Enable Doppler</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Blend Speed</span><span class="slider-val" id="sky-spd">1.0x</span></div>
+                                    <input type="range" class="slider" min="0.1" max="5" step="0.1" value="1" oninput="document.getElementById('sky-spd').textContent=this.value+'x'">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Props</div>
+                                <div class="row"><span>Wireframe Smoke</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Transparent Molotov</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Bullet Impacts</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- CHAMS -->
-                <div class="tab-content" id="chams">
-                    <div class="section">
-                        <div class="section-title">Chams Settings</div>
-                        <div class="control-row">
-                            <span>Enabled</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>Rainbow Mode</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>Chams Color</span>
-                            <div class="color-wrap">
-                                <div class="color-box" style="background: #22c55e;" onclick="document.getElementById('chams-color').click()"></div>
-                                <input type="color" id="chams-color" value="#22c55e">
+                <div class="page" id="chams">
+                    <div class="grid-3">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Local Player</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="mat-grid" style="grid-template-columns:1fr 1fr">
+                                    <div class="mat on">Flat</div>
+                                    <div class="mat">Metallic</div>
+                                </div>
+                                <div class="color-btn" style="background:#ff4757;margin-top:10px" onclick="document.getElementById('loc-col').click()"></div>
+                                <input type="color" id="loc-col" value="#ff4757">
                             </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- AIMBOT -->
-                <div class="tab-content" id="aimbot">
-                    <div class="section">
-                        <div class="section-title">Aimbot Settings</div>
-                        <div class="control-row">
-                            <span>Enabled</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>Firing Check</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>Visibility Check</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="select-box">
-                            <select>
-                                <option>Head</option>
-                                <option>Spine</option>
-                                <option>Hips</option>
-                                <option>Left Arm</option>
-                                <option>Right Arm</option>
-                                <option>Left Leg</option>
-                                <option>Right Leg</option>
-                            </select>
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>FOV</span>
-                                <span class="slider-val" id="fov-val">90°</span>
-                            </div>
-                            <input type="range" class="slider" min="1" max="180" value="90" oninput="document.getElementById('fov-val').textContent = this.value + '°'">
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Smoothness</span>
-                                <span class="slider-val" id="smooth-val">50</span>
-                            </div>
-                            <input type="range" class="slider" min="1" max="100" value="50" oninput="document.getElementById('smooth-val').textContent = this.value">
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Max Distance</span>
-                                <span class="slider-val" id="dist-val">200m</span>
-                            </div>
-                            <input type="range" class="slider" min="1" max="400" value="200" oninput="document.getElementById('dist-val').textContent = this.value + 'm'">
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Humanization</div>
-                        <div class="control-row">
-                            <span>Enabled</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Assist Strength</span>
-                                <span class="slider-val" id="assist-val">75%</span>
-                            </div>
-                            <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('assist-val').textContent = this.value + '%'">
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Reaction Time</span>
-                                <span class="slider-val" id="react-val">150ms</span>
-                            </div>
-                            <input type="range" class="slider" min="0" max="500" value="150" oninput="document.getElementById('react-val').textContent = this.value + 'ms'">
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Hand Tremor</span>
-                                <span class="slider-val" id="tremor-val">10%</span>
-                            </div>
-                            <input type="range" class="slider" min="0" max="100" value="10" oninput="document.getElementById('tremor-val').textContent = this.value + '%'">
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Overshoot</span>
-                                <span class="slider-val" id="over-val">5%</span>
-                            </div>
-                            <input type="range" class="slider" min="0" max="50" value="5" oninput="document.getElementById('over-val').textContent = this.value + '%'">
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Deadzone</span>
-                                <span class="slider-val" id="dead-val">2px</span>
-                            </div>
-                            <input type="range" class="slider" min="0" max="20" value="2" oninput="document.getElementById('dead-val').textContent = this.value + 'px'">
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Hitbox Configs</div>
-                        <div class="control-row">
-                            <span>Enabled</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="hitbox-list">
-                            <div class="hitbox-item">
-                                <span class="hitbox-name">Head</span>
-                                <div class="hitbox-input">
-                                    <span>Limit:</span>
-                                    <input type="number" class="num-input" value="20" min="0" max="20">
+                            
+                            <div class="box">
+                                <div class="box-title">Viewmodel</div>
+                                <div class="row"><span>Weapon Chams</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Arm Chams</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="mat-grid" style="grid-template-columns:1fr 1fr;margin-top:10px">
+                                    <div class="mat">Wireframe</div>
+                                    <div class="mat on">Glow</div>
                                 </div>
                             </div>
-                            <div class="hitbox-item">
-                                <span class="hitbox-name">Body</span>
-                                <div class="hitbox-input">
-                                    <span>Limit:</span>
-                                    <input type="number" class="num-input" value="20" min="0" max="20">
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Enemy Chams</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Behind Wall</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="mat-grid">
+                                    <div class="mat on">Color</div>
+                                    <div class="mat">Flat</div>
+                                    <div class="mat">Metallic</div>
+                                    <div class="mat">Glow</div>
+                                    <div class="mat">Pearlescent</div>
+                                    <div class="mat">Ghost</div>
                                 </div>
                             </div>
-                            <div class="hitbox-item">
-                                <span class="hitbox-name">Leg</span>
-                                <div class="hitbox-input">
-                                    <span>Limit:</span>
-                                    <input type="number" class="num-input" value="20" min="0" max="20">
+                            
+                            <div class="box">
+                                <div class="box-title">Team Chams</div>
+                                <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="color-btn" style="background:#2ed573" onclick="document.getElementById('team-col').click()"></div>
+                                <input type="color" id="team-col" value="#2ed573">
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Agent Changer</div>
+                                <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <select style="margin-bottom:10px">
+                                    <option>Default</option>
+                                    <option>FBI</option>
+                                    <option>SAS</option>
+                                    <option>SEAL</option>
+                                    <option>Balkan</option>
+                                    <option>Professional</option>
+                                    <option>Anarchist</option>
+                                    <option>Pirate</option>
+                                </select>
+                                <div class="mat-grid" style="grid-template-columns:1fr 1fr">
+                                    <div class="mat">Latex</div>
+                                    <div class="mat">Metallic</div>
+                                    <div class="mat">Flat</div>
+                                    <div class="mat on">Glow</div>
                                 </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Glove Chams</div>
+                                <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="color-btn" style="background:#ffa502" onclick="document.getElementById('glove-col').click()"></div>
+                                <input type="color" id="glove-col" value="#ffa502">
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Weapon Chams</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="color-btn" style="background:#3742fa" onclick="document.getElementById('wep-cham-col').click()"></div>
+                                <input type="color" id="wep-cham-col" value="#3742fa">
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- MISC -->
-                <div class="tab-content" id="misc">
-                    <div class="section">
-                        <div class="section-title">Misc Core</div>
-                        <div class="control-row">
-                            <span>Team Radar</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>No Recoil</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>No Duck</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Misc Extra</div>
-                        <div class="control-row">
-                            <span>Wall Shoot</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="control-row">
-                            <span>Speedhack</span>
-                            <div class="toggle" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div class="slider-wrap">
-                            <div class="slider-label">
-                                <span>Speedhack Multiplier</span>
-                                <span class="slider-val" id="speed-val">1.0x</span>
+                <div class="page" id="misc">
+                    <div class="grid-3">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Movement</div>
+                                <div class="row"><span>Bunnyhop</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Autostrafe</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Speed Boost</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Fast Crouch</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Slide Walk</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                             </div>
-                            <input type="range" class="slider" min="1" max="10" step="0.1" value="1" oninput="document.getElementById('speed-val').textContent = this.value + 'x'">
+                            
+                            <div class="box">
+                                <div class="box-title">Inventory</div>
+                                <div class="row"><span>Auto Armor</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Auto Defuser</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <select style="margin-top:10px">
+                                    <option>Primary: AK-47</option>
+                                    <option>Primary: M4A4</option>
+                                    <option>Primary: AWP</option>
+                                    <option>Primary: Scout</option>
+                                </select>
+                                <select style="margin-top:8px">
+                                    <option>Secondary: Glock</option>
+                                    <option>Secondary: USP-S</option>
+                                    <option>Secondary: Deagle</option>
+                                    <option>Secondary: P250</option>
+                                </select>
+                                <div class="check-grid" style="margin-top:10px">
+                                    <label class="check"><input type="checkbox" checked> HE</label>
+                                    <label class="check"><input type="checkbox" checked> Flash</label>
+                                    <label class="check"><input type="checkbox" checked> Smoke</label>
+                                    <label class="check"><input type="checkbox"> Molotov</label>
+                                    <label class="check"><input type="checkbox"> Decoy</label>
+                                    <label class="check"><input type="checkbox"> Defuse</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Matchmaking</div>
+                                <div class="row"><span>Auto Accept</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Rank Revealer</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Profile Changer</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Sound</div>
+                                <div class="row"><span>Hitsound</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <select style="margin-top:10px">
+                                    <option>Default</option>
+                                    <option>Metallic</option>
+                                    <option>Bell</option>
+                                    <option>Coin</option>
+                                    <option>Custom...</option>
+                                </select>
+                                <div class="row" style="margin-top:10px"><span>Killsound</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Volume Override</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Volume</span><span class="slider-val" id="snd-vol">100%</span></div>
+                                    <input type="range" class="slider" min="0" max="200" value="100" oninput="document.getElementById('snd-vol').textContent=this.value+'%'">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Radar</div>
+                                <div class="row"><span>Local Only</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Bomb Timer</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Spectator List</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Radar Size</span><span class="slider-val" id="rad-size">1.0</span></div>
+                                    <input type="range" class="slider" min="0.5" max="2" step="0.1" value="1" oninput="document.getElementById('rad-size').textContent=this.value">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Performance</div>
+                                <div class="row"><span>Fast Render</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>No Fog</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Disable Post-Process</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Force FPS</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Max FPS</span><span class="slider-val" id="max-fps">300</span></div>
+                                    <input type="range" class="slider" min="60" max="1000" value="300" oninput="document.getElementById('max-fps').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Security</div>
+                                <div class="row"><span>Anti Screenshot</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Clean Record</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Stream Mode</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- CONFIGS -->
-                <div class="tab-content" id="configs">
-                    <div class="stream-banner">
-                        <div class="stream-info">
+                <div class="page" id="configs">
+                    <div class="stream-ban">
+                        <div class="stream-l">
                             <span class="stream-icon">📺</span>
                             <div>
-                                <div class="stream-title">Stream Mode</div>
-                                <div class="stream-desc">Hide sensitive information when streaming</div>
+                                <div class="stream-t">Stream Mode Active</div>
+                                <div class="stream-d">Hides all visual features from OBS/Recording</div>
                             </div>
                         </div>
-                        <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                        <div class="toggle" onclick="this.classList.toggle('on')"></div>
                     </div>
                     
-                    <div class="section">
-                        <div class="section-title">Config Management</div>
-                        <div class="btn-group" style="margin-bottom: 20px;">
-                            <button class="btn">Save Config</button>
-                            <button class="btn btn-outline">Upload</button>
-                            <button class="btn btn-outline">Manage</button>
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-outline">Save HUD</button>
-                            <button class="btn btn-red">Delete HUD</button>
-                            <button class="btn">Load</button>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Saved Configs</div>
-                        <div class="config-list">
-                            <div class="config-item">
-                                <span class="config-name">Default Config</span>
-                                <div class="config-actions">
-                                    <button class="btn btn-sm">Load</button>
-                                    <button class="btn btn-sm btn-outline">Edit</button>
-                                    <button class="btn btn-sm btn-red">Del</button>
+                    <div class="grid-2">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Save & Load</div>
+                                <div class="btn-row">
+                                    <button class="btn">Save Config</button>
+                                    <button class="btn btn-line">Load Config</button>
+                                </div>
+                                <div class="btn-row">
+                                    <button class="btn btn-line">Export</button>
+                                    <button class="btn btn-line">Import</button>
+                                </div>
+                                <div class="inp-row" style="margin-top:15px">
+                                    <input type="text" class="input" placeholder="Config name...">
+                                    <button class="btn">Create</button>
                                 </div>
                             </div>
-                            <div class="config-item">
-                                <span class="config-name">Competitive Setup</span>
-                                <div class="config-actions">
-                                    <button class="btn btn-sm">Load</button>
-                                    <button class="btn btn-sm btn-outline">Edit</button>
-                                    <button class="btn btn-sm btn-red">Del</button>
-                                </div>
-                            </div>
-                            <div class="config-item">
-                                <span class="config-name">Testing Profile</span>
-                                <div class="config-actions">
-                                    <button class="btn btn-sm">Load</button>
-                                    <button class="btn btn-sm btn-outline">Edit</button>
-                                    <button class="btn btn-sm btn-red">Del</button>
-                                </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Cloud Sync</div>
+                                <div class="row"><span>Auto Backup</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Sync Across Devices</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- CONFIG BROWSER -->
-                <div class="tab-content" id="browser">
-                    <div class="section">
-                        <div class="section-title">Public Configs</div>
-                        <button class="btn" style="margin-bottom: 20px;">Refresh Config List</button>
                         
-                        <div class="config-list">
-                            <div class="config-item">
-                                <span class="config-name">Pro Player Setup v2</span>
-                                <div class="config-actions">
-                                    <button class="btn btn-sm">Download</button>
-                                    <button class="btn btn-sm btn-outline">Preview</button>
-                                </div>
-                            </div>
-                            <div class="config-item">
-                                <span class="config-name">Beginner Friendly</span>
-                                <div class="config-actions">
-                                    <button class="btn btn-sm">Download</button>
-                                    <button class="btn btn-sm btn-outline">Preview</button>
-                                </div>
-                            </div>
-                            <div class="config-item">
-                                <span class="config-name">Stream Safe Config</span>
-                                <div class="config-actions">
-                                    <button class="btn btn-sm">Download</button>
-                                    <button class="btn btn-sm btn-outline">Preview</button>
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Saved Configs</div>
+                                <div class="cfg-list">
+                                    <div class="cfg-item">
+                                        <span class="cfg-name">Legit Config</span>
+                                        <div class="cfg-btns">
+                                            <button class="btn btn-sm">Load</button>
+                                            <button class="btn btn-sm btn-line">Edit</button>
+                                            <button class="btn btn-sm btn-bad">Del</button>
+                                        </div>
+                                    </div>
+                                    <div class="cfg-item">
+                                        <span class="cfg-name">HvH Config</span>
+                                        <div class="cfg-btns">
+                                            <button class="btn btn-sm">Load</button>
+                                            <button class="btn btn-sm btn-line">Edit</button>
+                                            <button class="btn btn-sm btn-bad">Del</button>
+                                        </div>
+                                    </div>
+                                    <div class="cfg-item">
+                                        <span class="cfg-name">Stream Safe</span>
+                                        <div class="cfg-btns">
+                                            <button class="btn btn-sm">Load</button>
+                                            <button class="btn btn-sm btn-line">Edit</button>
+                                            <button class="btn btn-sm btn-bad">Del</button>
+                                        </div>
+                                    </div>
+                                    <div class="cfg-item">
+                                        <span class="cfg-name">MM Config</span>
+                                        <div class="cfg-btns">
+                                            <button class="btn btn-sm">Load</button>
+                                            <button class="btn btn-sm btn-line">Edit</button>
+                                            <button class="btn btn-sm btn-bad">Del</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- SKINCHANGER -->
-                <div class="tab-content" id="skins">
-                    <div class="section">
-                        <div class="section-title">Skinchanger Settings</div>
-                        <div class="control-row">
-                            <span>Enabled</span>
-                            <div class="toggle active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <div class="slider-label">
-                                <span>Weapon ID</span>
+                <!-- SKINS -->
+                <div class="page" id="skins">
+                    <div class="grid-2">
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Skin Changer</div>
+                                <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Knife Changer</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Glove Changer</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row"><span>Agent Changer</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                             </div>
-                            <input type="text" class="input" placeholder="Enter Weapon ID...">
+                            
+                            <div class="box">
+                                <div class="box-title">Weapon ID</div>
+                                <input type="text" class="input" placeholder="Enter weapon ID..." style="margin-bottom:10px">
+                                <div class="wep-grid" style="max-height:150px">
+                                    <div class="wep on">AK47</div>
+                                    <div class="wep">M4A4</div>
+                                    <div class="wep">AWP</div>
+                                    <div class="wep">Deagle</div>
+                                    <div class="wep">Glock</div>
+                                    <div class="wep">USP</div>
+                                    <div class="wep">Scout</div>
+                                    <div class="wep">P250</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Select Weapon</div>
-                        <div class="weapon-grid">
-                            <div class="weapon-item active">Deagle</div>
-                            <div class="weapon-item">GSR1911</div>
-                            <div class="weapon-item">MR96</div>
-                            <div class="weapon-item">MTX</div>
-                            <div class="weapon-item">P250</div>
-                            <div class="weapon-item">XD45</div>
-                            <div class="weapon-item">MP5</div>
-                            <div class="weapon-item">MP7</div>
-                            <div class="weapon-item">MPX</div>
-                            <div class="weapon-item">P90</div>
-                            <div class="weapon-item">Vector</div>
-                            <div class="weapon-item">AK47</div>
-                            <div class="weapon-item">AR15</div>
-                            <div class="weapon-item">AUG</div>
-                            <div class="weapon-item">HK417</div>
-                            <div class="weapon-item">M4</div>
-                            <div class="weapon-item">SA58</div>
-                            <div class="weapon-item">SG551</div>
-                            <div class="weapon-item">SCARH</div>
-                            <div class="weapon-item">FP6</div>
-                            <div class="weapon-item">Super90</div>
-                            <div class="weapon-item">Winchester</div>
-                            <div class="weapon-item">KSG</div>
-                            <div class="weapon-item">M14</div>
-                            <div class="weapon-item">SVD</div>
-                            <div class="weapon-item">TRG</div>
-                            <div class="weapon-item">URatio</div>
-                            <div class="weapon-item">Empty Hands</div>
-                            <div class="weapon-item">Knife</div>
-                            <div class="weapon-item">Flashbang</div>
-                            <div class="weapon-item">Frag</div>
-                            <div class="weapon-item">Smoke Grenade</div>
-                            <div class="weapon-item">Gloves</div>
+                        
+                        <div class="col">
+                            <div class="box">
+                                <div class="box-title">Skin Settings</div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Paint Kit ID</span><span class="slider-val" id="paint-id">0</span></div>
+                                    <input type="range" class="slider" min="0" max="1000" value="0" oninput="document.getElementById('paint-id').textContent=this.value">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Seed</span><span class="slider-val" id="seed">0</span></div>
+                                    <input type="range" class="slider" min="0" max="1000" value="0" oninput="document.getElementById('seed').textContent=this.value">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>Wear</span><span class="slider-val" id="wear">0.00</span></div>
+                                    <input type="range" class="slider" min="0" max="1" step="0.001" value="0" oninput="document.getElementById('wear').textContent=this.value">
+                                </div>
+                                <div class="slider-box">
+                                    <div class="slider-top"><span>StatTrak</span><span class="slider-val" id="stattrak">0</span></div>
+                                    <input type="range" class="slider" min="0" max="100000" value="0" oninput="document.getElementById('stattrak').textContent=this.value">
+                                </div>
+                            </div>
+                            
+                            <div class="box">
+                                <div class="box-title">Add Skin</div>
+                                <div class="inp-row">
+                                    <input type="text" class="input" placeholder="Skin ID...">
+                                    <button class="btn">Add</button>
+                                </div>
+                                <div class="btn-row" style="margin-top:10px">
+                                    <button class="btn btn-line">Update</button>
+                                    <button class="btn btn-line">Force</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Add Skin</div>
-                        <div class="input-row">
-                            <input type="text" class="input" placeholder="Enter Skin ID...">
-                            <button class="btn">Add Skin</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CHAT -->
-                <div class="tab-content" id="chat">
-                    <div class="empty">
-                        <div class="empty-icon">💬</div>
-                        <h3>Chat System</h3>
-                        <p>Chat functionality will be displayed here when active.</p>
-                    </div>
-                </div>
-                
-                <!-- LOGS -->
-                <div class="tab-content" id="logs">
-                    <div class="empty">
-                        <div class="empty-icon">📋</div>
-                        <h3>System Logs</h3>
-                        <p>Activity logs and system events will appear here.</p>
                     </div>
                 </div>
             </div>
@@ -1208,58 +1460,44 @@
     </div>
     
     <script>
-        // Tab switching
-        document.querySelectorAll('.tab-item').forEach(tab => {
+        document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 
                 this.classList.add('active');
-                
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+                const page = this.getAttribute('data-page');
+                document.getElementById(page).classList.add('active');
                 
                 const titles = {
-                    'esp': 'ESP Settings',
-                    'chams': 'Chams Configuration',
-                    'aimbot': 'Aimbot Configuration',
-                    'misc': 'Miscellaneous Settings',
-                    'configs': 'Config Management',
-                    'browser': 'Config Browser',
-                    'skins': 'Skinchanger',
-                    'chat': 'Chat System',
-                    'logs': 'System Logs'
+                    'ragebot': 'Ragebot',
+                    'antiaim': 'AntiAim',
+                    'legit': 'Legitbot',
+                    'visual': 'Player ESP',
+                    'world': 'World Visuals',
+                    'chams': 'Chams',
+                    'misc': 'Miscellaneous',
+                    'configs': 'Config Manager',
+                    'skins': 'Skin Changer'
                 };
-                document.getElementById('header-title').textContent = titles[tabId];
+                document.getElementById('page-title').textContent = titles[page];
             });
         });
         
-        // Weapon selection
-        document.querySelectorAll('.weapon-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.weapon-item').forEach(w => w.classList.remove('active'));
-                this.classList.add('active');
+        document.querySelectorAll('.wep, .mat').forEach(el => {
+            el.addEventListener('click', function() {
+                if (this.classList.contains('wep')) {
+                    document.querySelectorAll('.wep').forEach(w => w.classList.remove('on'));
+                }
+                this.classList.toggle('on');
             });
         });
         
-        // Color picker
         document.querySelectorAll('input[type="color"]').forEach(picker => {
             picker.addEventListener('input', function() {
                 this.previousElementSibling.style.background = this.value;
             });
         });
-        
-        // Subscription timer
-        setInterval(() => {
-            const el = document.getElementById('sub-time');
-            let [d, h, m] = el.textContent.match(/(\d+)d (\d+)h (\d+)m/).slice(1).map(Number);
-            
-            if (m > 0) m--;
-            else if (h > 0) { h--; m = 59; }
-            else if (d > 0) { d--; h = 23; m = 59; }
-            
-            el.textContent = `${d}d ${h}h ${m}m`;
-        }, 60000);
     </script>
 </body>
 </html>
