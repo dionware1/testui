@@ -12,49 +12,52 @@
         }
         
         :root {
-            --bg: #0a0a0f;
-            --panel: #12121a;
-            --panel-light: #1a1a25;
-            --border: #2a2a3a;
-            --accent: #ff4757;
-            --accent-glow: rgba(255, 71, 87, 0.3);
+            --bg: #0f0f1a;
+            --panel: #1a1a2e;
+            --panel-light: #252542;
+            --border: #3d3d5c;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.4);
             --text: #ffffff;
-            --text-dim: #8b8b9f;
-            --success: #2ed573;
-            --warning: #ffa502;
+            --text-dim: #a0a0b0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-weight: 800;
-            background: var(--bg);
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
             color: var(--text);
             overflow: hidden;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .menu {
             width: 1280px;
             height: 800px;
-            margin: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background: var(--panel);
             display: flex;
+            border-radius: 20px;
             border: 2px solid var(--border);
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px var(--accent-glow);
+            overflow: hidden;
         }
         
         /* SIDEBAR */
         .sidebar {
             width: 240px;
-            background: var(--bg);
+            background: linear-gradient(180deg, var(--bg) 0%, var(--panel) 100%);
             border-right: 2px solid var(--border);
             display: flex;
             flex-direction: column;
+            border-radius: 20px 0 0 20px;
         }
         
         .logo-wrap {
@@ -63,7 +66,8 @@
             align-items: center;
             justify-content: center;
             border-bottom: 2px solid var(--border);
-            background: linear-gradient(180deg, rgba(255,71,87,0.1) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.15) 0%, transparent 100%);
+            border-radius: 20px 0 0 0;
         }
         
         .logo {
@@ -89,7 +93,7 @@
             letter-spacing: 2px;
             color: var(--accent);
             padding: 0 20px 8px;
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
         .tab {
@@ -98,25 +102,27 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 10px 20px;
+            margin: 2px 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 10px;
             color: var(--text-dim);
-            border-left: 3px solid transparent;
-            transition: all 0.1s;
+            border-radius: 10px;
+            transition: all 0.2s ease;
         }
         
         .tab:hover, .tab.active {
-            background: var(--panel-light);
+            background: rgba(139, 92, 246, 0.2);
             color: var(--text);
-            border-left-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         .user-box {
             padding: 15px 20px;
             border-top: 2px solid var(--border);
-            background: var(--panel-light);
+            background: var(--bg);
+            border-radius: 0 0 0 16px;
         }
         
         .user-row {
@@ -129,13 +135,14 @@
         .user-av {
             width: 36px;
             height: 36px;
-            background: var(--accent);
-            border-radius: 6px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
             font-weight: 900;
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         .user-name {
@@ -158,13 +165,14 @@
             height: 6px;
             background: var(--success);
             border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
         }
         
         .sub-box {
-            background: rgba(255,71,87,0.1);
+            background: rgba(139, 92, 246, 0.1);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 10px;
+            border-radius: 10px;
+            padding: 12px;
         }
         
         .sub-label {
@@ -180,20 +188,23 @@
             font-weight: 900;
             color: var(--accent);
             margin-top: 4px;
+            text-shadow: 0 0 10px var(--accent-glow);
         }
         
         .sub-bar {
-            height: 3px;
+            height: 4px;
             background: var(--border);
-            margin-top: 8px;
+            margin-top: 10px;
             border-radius: 2px;
+            overflow: hidden;
         }
         
         .sub-fill {
             width: 75%;
             height: 100%;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
             border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent-glow);
         }
         
         /* MAIN */
@@ -201,51 +212,33 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            background: linear-gradient(135deg, var(--panel) 0%, var(--bg) 100%);
+            border-radius: 0 20px 20px 0;
             overflow: hidden;
         }
         
         .header {
-            height: 60px;
-            background: var(--bg);
+            height: 70px;
+            background: rgba(15, 15, 26, 0.8);
             border-bottom: 2px solid var(--border);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 25px;
+            padding: 0 30px;
+            border-radius: 0 20px 0 0;
         }
         
         .header-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .header-btns {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .h-btn {
-            width: 32px;
-            height: 32px;
-            background: var(--panel-light);
-            border: 1px solid var(--border);
-            color: var(--text);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        
-        .h-btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
         }
         
         .content {
             flex: 1;
-            padding: 20px;
+            padding: 25px;
             overflow: hidden;
         }
         
@@ -258,45 +251,47 @@
             display: block;
         }
         
-        /* GRID LAYOUT */
+        /* GRID LAYOUTS */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
             height: 100%;
         }
         
         .grid-3 {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
             height: 100%;
         }
         
         .col {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             overflow: hidden;
         }
         
         /* BOX */
         .box {
-            background: var(--bg);
+            background: rgba(15, 15, 26, 0.6);
             border: 2px solid var(--border);
-            border-radius: 6px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
         }
         
         .box-title {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 900;
             text-transform: uppercase;
             color: var(--accent);
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
         
         /* CONTROLS */
@@ -304,49 +299,52 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 11px;
+            padding: 10px 0;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
         .row:not(:last-child) {
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(61, 61, 92, 0.5);
         }
         
         .toggle {
-            width: 44px;
-            height: 22px;
+            width: 48px;
+            height: 26px;
             background: var(--border);
-            border-radius: 11px;
+            border-radius: 13px;
             cursor: pointer;
             position: relative;
-            transition: 0.15s;
+            transition: 0.2s;
         }
         
         .toggle.on {
             background: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         .toggle::after {
             content: '';
             position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 18px;
-            height: 18px;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
             background: white;
             border-radius: 50%;
-            transition: 0.15s;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
         .toggle.on::after {
-            left: 24px;
+            left: 25px;
+            background: var(--text);
         }
         
         .slider-box {
-            margin-top: 10px;
+            margin-top: 12px;
         }
         
         .slider-top {
@@ -356,50 +354,65 @@
             font-weight: 800;
             text-transform: uppercase;
             color: var(--text-dim);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
         
         .slider-val {
             color: var(--accent);
+            text-shadow: 0 0 8px var(--accent-glow);
         }
         
         .slider {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: var(--border);
-            border-radius: 3px;
+            border-radius: 4px;
             outline: none;
             -webkit-appearance: none;
         }
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             background: var(--accent);
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid white;
+            border: 3px solid white;
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         select, input[type="text"], input[type="number"] {
             width: 100%;
-            padding: 8px 10px;
-            background: var(--panel-light);
-            border: 1px solid var(--border);
+            padding: 12px 15px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 10px;
             color: var(--text);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
-            border-radius: 4px;
-            margin-top: 8px;
+            outline: none;
+            transition: 0.2s;
+        }
+        
+        select:focus, input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         .color-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             border: 2px solid var(--border);
             cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .color-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         input[type="color"] {
@@ -407,83 +420,107 @@
         }
         
         .btn {
-            padding: 8px 16px;
-            background: var(--accent);
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             border: none;
+            border-radius: 10px;
             color: white;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: 0.2s;
+            box-shadow: 0 5px 20px var(--accent-glow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--accent-glow);
         }
         
         .btn-sm {
-            padding: 6px 12px;
-            font-size: 9px;
+            padding: 8px 16px;
+            font-size: 10px;
         }
         
         .btn-line {
             background: transparent;
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
+            box-shadow: none;
+        }
+        
+        .btn-line:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 5px 20px var(--accent-glow);
         }
         
         .btn-bad {
-            background: #ff3838;
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            box-shadow: 0 5px 20px rgba(239, 68, 68, 0.3);
         }
         
         .btn-row {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 12px;
         }
         
         /* WEAPON GRID */
         .wep-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            gap: 8px;
             max-height: 200px;
         }
         
         .wep {
-            padding: 8px 4px;
-            background: var(--panel-light);
-            border: 1px solid var(--border);
+            padding: 10px 6px;
+            background: var(--bg);
+            border: 2px solid var(--border);
             text-align: center;
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 8px;
+            transition: 0.2s;
         }
         
         .wep:hover, .wep.on {
             background: var(--accent);
             border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         /* CHECK GRID */
         .check-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
         }
         
         .check {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 10px;
+            gap: 10px;
+            font-size: 11px;
             font-weight: 700;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        
+        .check:hover {
+            background: rgba(139, 92, 246, 0.1);
         }
         
         .check input {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             accent-color: var(--accent);
         }
         
@@ -491,23 +528,25 @@
         .mat-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 8px;
         }
         
         .mat {
-            padding: 10px;
-            background: var(--panel-light);
-            border: 1px solid var(--border);
+            padding: 12px;
+            background: var(--bg);
+            border: 2px solid var(--border);
             text-align: center;
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 800;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 8px;
+            transition: 0.2s;
         }
         
         .mat:hover, .mat.on {
             background: var(--accent);
             border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         
         /* HITBOX ROWS */
@@ -515,94 +554,184 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px;
-            background: var(--panel-light);
-            margin-bottom: 6px;
-            border-radius: 4px;
+            padding: 12px;
+            background: var(--bg);
+            margin-bottom: 8px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
         
         .hb-name {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .hb-input {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .hb-input span {
-            font-size: 9px;
+            font-size: 10px;
             color: var(--text-dim);
+            font-weight: 700;
         }
         
         .hb-input input {
-            width: 50px;
+            width: 60px;
             margin: 0;
             text-align: center;
+            padding: 8px;
         }
         
         /* CONFIG LIST */
         .cfg-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
         
         .cfg-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px;
-            background: var(--panel-light);
-            border: 1px solid var(--border);
-            border-radius: 4px;
+            padding: 15px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        
+        .cfg-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
         
         .cfg-name {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
+            letter-spacing: 1px;
         }
         
         .cfg-btns {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
         
         /* STREAM BANNER */
         .stream-ban {
-            background: rgba(255, 56, 56, 0.1);
-            border: 1px solid rgba(255, 56, 56, 0.3);
-            padding: 15px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            padding: 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 15px;
-            border-radius: 4px;
+            margin-bottom: 20px;
+            border-radius: 12px;
         }
         
         .stream-l {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
         
         .stream-icon {
-            font-size: 24px;
+            font-size: 28px;
         }
         
         .stream-t {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 900;
-            color: #ff3838;
+            color: var(--danger);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .stream-d {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-dim);
-            margin-top: 2px;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+        
+        /* THEME PAGE */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .theme-box {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .theme-preview {
+            width: 100%;
+            height: 120px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid var(--border);
+        }
+        
+        .theme-name {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .theme-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .theme-btn:hover {
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+        
+        .theme-btn.active {
+            background: var(--success);
+        }
+        
+        .color-picker-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: var(--bg);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .color-picker-label {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .custom-theme {
+            margin-top: 25px;
         }
         
         /* EMPTY */
@@ -613,22 +742,30 @@
         }
         
         .empty i {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 56px;
+            margin-bottom: 25px;
             display: block;
+            opacity: 0.5;
         }
         
         .empty h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 900;
             color: var(--text);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .empty p {
+            font-size: 13px;
+            font-weight: 700;
         }
         
         /* INPUT ROW */
         .inp-row {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         
         .inp-row input {
@@ -636,9 +773,9 @@
             margin: 0;
         }
         
-        /* SCROLLBAR HIDE */
+        /* SCROLLBAR */
         ::-webkit-scrollbar {
-            width: 4px;
+            width: 6px;
         }
         
         ::-webkit-scrollbar-track {
@@ -647,12 +784,12 @@
         
         ::-webkit-scrollbar-thumb {
             background: var(--accent);
-            border-radius: 2px;
+            border-radius: 3px;
         }
         
         .col-scroll {
             overflow-y: auto;
-            padding-right: 5px;
+            padding-right: 8px;
         }
     </style>
 </head>
@@ -683,6 +820,7 @@
                     <div class="tab" data-page="misc">Misc</div>
                     <div class="tab" data-page="configs">Configs</div>
                     <div class="tab" data-page="skins">Skins</div>
+                    <div class="tab" data-page="theme">Theme</div>
                 </div>
             </div>
             
@@ -705,11 +843,6 @@
         <main class="main">
             <header class="header">
                 <h1 class="header-title" id="page-title">Ragebot</h1>
-                <div class="header-btns">
-                    <button class="h-btn">⚙</button>
-                    <button class="h-btn">−</button>
-                    <button class="h-btn">×</button>
-                </div>
             </header>
             
             <div class="content">
@@ -758,7 +891,7 @@
                                     <label class="check"><input type="checkbox"> Legs</label>
                                     <label class="check"><input type="checkbox"> Feet</label>
                                 </div>
-                                <div class="row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+                                <div class="row" style="margin-top:15px;padding-top:15px;border-top:1px solid var(--border)">
                                     <span>Multipoint</span><div class="toggle on" onclick="this.classList.toggle('on')"></div>
                                 </div>
                             </div>
@@ -805,7 +938,7 @@
                                     <option>Minimal</option>
                                     <option>Random</option>
                                 </select>
-                                <div class="row" style="margin-top:10px"><span>Jitter</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row" style="margin-top:12px"><span>Jitter</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                             </div>
                             
                             <div class="box">
@@ -840,7 +973,7 @@
                                     <div class="slider-top"><span>Amount</span><span class="slider-val" id="ds-amt">60%</span></div>
                                     <input type="range" class="slider" min="0" max="100" value="60" oninput="document.getElementById('ds-amt').textContent=this.value+'%'">
                                 </div>
-                                <select style="margin-top:10px">
+                                <select style="margin-top:12px">
                                     <option>Opposite</option>
                                     <option>Jitter</option>
                                     <option>Random</option>
@@ -855,7 +988,7 @@
                                     <div class="slider-top"><span>Limit</span><span class="slider-val" id="fl-lim">14</span></div>
                                     <input type="range" class="slider" min="1" max="14" value="14" oninput="document.getElementById('fl-lim').textContent=this.value">
                                 </div>
-                                <div class="row" style="margin-top:10px"><span>While Shooting</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row" style="margin-top:12px"><span>While Shooting</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                             </div>
                         </div>
                         
@@ -899,7 +1032,7 @@
                                 <div class="box-title">Aimbot Settings</div>
                                 <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
                                 <div class="row"><span>Visibility Check</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-                                <select style="margin-top:10px">
+                                <select style="margin-top:12px">
                                     <option>Head</option>
                                     <option>Neck</option>
                                     <option>Chest</option>
@@ -993,8 +1126,8 @@
                             <div class="box">
                                 <div class="box-title">Bullet Tracers</div>
                                 <div class="row"><span>Enabled</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-                                <div class="color-btn" style="background:#ff4757;display:inline-block;vertical-align:middle;margin-left:10px" onclick="document.getElementById('tracer-col').click()"></div>
-                                <input type="color" id="tracer-col" value="#ff4757">
+                                <div class="color-btn" style="background:#8b5cf6;display:inline-block;vertical-align:middle;margin-left:10px" onclick="document.getElementById('tracer-col').click()"></div>
+                                <input type="color" id="tracer-col" value="#8b5cf6">
                                 <div class="slider-box">
                                     <div class="slider-top"><span>Duration</span><span class="slider-val" id="tracer-dur">2.0s</span></div>
                                     <input type="range" class="slider" min="0.5" max="10" step="0.1" value="2" oninput="document.getElementById('tracer-dur').textContent=this.value+'s'">
@@ -1003,7 +1136,7 @@
                                     <div class="slider-top"><span>Opacity</span><span class="slider-val" id="tracer-op">100%</span></div>
                                     <input type="range" class="slider" min="0" max="100" value="100" oninput="document.getElementById('tracer-op').textContent=this.value+'%'">
                                 </div>
-                                <div class="row" style="margin-top:10px"><span>Local Only</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row" style="margin-top:12px"><span>Local Only</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                             </div>
                             
                             <div class="box">
@@ -1036,14 +1169,14 @@
                                     <div class="mat">Metallic</div>
                                     <div class="mat">Glow</div>
                                     <div class="mat">Pearlescent</div>
-                                    <div class="mat">Glass</div>
+                                    <div class="mat">Ghost</div>
                                 </div>
-                                <div class="color-btn" style="background:#ff4757;margin-top:10px" onclick="document.getElementById('cham-vis').click()"></div>
-                                <input type="color" id="cham-vis" value="#ff4757">
-                                <span style="font-size:10px;color:var(--text-dim);margin-left:8px">Visible</span>
-                                <div class="color-btn" style="background:#2ed573;margin-top:8px" onclick="document.getElementById('cham-xvis').click()"></div>
-                                <input type="color" id="cham-xvis" value="#2ed573">
-                                <span style="font-size:10px;color:var(--text-dim);margin-left:8px">X-Visible</span>
+                                <div class="color-btn" style="background:#8b5cf6;margin-top:12px" onclick="document.getElementById('cham-vis').click()"></div>
+                                <input type="color" id="cham-vis" value="#8b5cf6">
+                                <span style="font-size:11px;color:var(--text-dim);margin-left:10px;font-weight:700">Visible</span>
+                                <div class="color-btn" style="background:#10b981;margin-top:8px" onclick="document.getElementById('cham-xvis').click()"></div>
+                                <input type="color" id="cham-xvis" value="#10b981">
+                                <span style="font-size:11px;color:var(--text-dim);margin-left:10px;font-weight:700">X-Visible</span>
                             </div>
                         </div>
                     </div>
@@ -1098,12 +1231,12 @@
                             
                             <div class="box">
                                 <div class="box-title">Sky Changer (Doppler)</div>
-                                <div style="display:flex;gap:10px;margin-bottom:10px">
-                                    <div class="color-btn" style="background:#ff0066;flex:1;height:40px" onclick="document.getElementById('sky1').click()"></div>
+                                <div style="display:flex;gap:12px;margin-bottom:12px">
+                                    <div class="color-btn" style="background:#ff0066;flex:1;height:50px;border-radius:12px" onclick="document.getElementById('sky1').click()"></div>
                                     <input type="color" id="sky1" value="#ff0066">
-                                    <div class="color-btn" style="background:#6600ff;flex:1;height:40px" onclick="document.getElementById('sky2').click()"></div>
+                                    <div class="color-btn" style="background:#6600ff;flex:1;height:50px;border-radius:12px" onclick="document.getElementById('sky2').click()"></div>
                                     <input type="color" id="sky2" value="#6600ff">
-                                    <div class="color-btn" style="background:#00ffff;flex:1;height:40px" onclick="document.getElementById('sky3').click()"></div>
+                                    <div class="color-btn" style="background:#00ffff;flex:1;height:50px;border-radius:12px" onclick="document.getElementById('sky3').click()"></div>
                                     <input type="color" id="sky3" value="#00ffff">
                                 </div>
                                 <div class="row"><span>Enable Doppler</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
@@ -1134,15 +1267,15 @@
                                     <div class="mat on">Flat</div>
                                     <div class="mat">Metallic</div>
                                 </div>
-                                <div class="color-btn" style="background:#ff4757;margin-top:10px" onclick="document.getElementById('loc-col').click()"></div>
-                                <input type="color" id="loc-col" value="#ff4757">
+                                <div class="color-btn" style="background:#8b5cf6;margin-top:12px" onclick="document.getElementById('loc-col').click()"></div>
+                                <input type="color" id="loc-col" value="#8b5cf6">
                             </div>
                             
                             <div class="box">
                                 <div class="box-title">Viewmodel</div>
                                 <div class="row"><span>Weapon Chams</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
                                 <div class="row"><span>Arm Chams</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-                                <div class="mat-grid" style="grid-template-columns:1fr 1fr;margin-top:10px">
+                                <div class="mat-grid" style="grid-template-columns:1fr 1fr;margin-top:12px">
                                     <div class="mat">Wireframe</div>
                                     <div class="mat on">Glow</div>
                                 </div>
@@ -1167,8 +1300,8 @@
                             <div class="box">
                                 <div class="box-title">Team Chams</div>
                                 <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-                                <div class="color-btn" style="background:#2ed573" onclick="document.getElementById('team-col').click()"></div>
-                                <input type="color" id="team-col" value="#2ed573">
+                                <div class="color-btn" style="background:#10b981" onclick="document.getElementById('team-col').click()"></div>
+                                <input type="color" id="team-col" value="#10b981">
                             </div>
                         </div>
                         
@@ -1176,7 +1309,7 @@
                             <div class="box">
                                 <div class="box-title">Agent Changer</div>
                                 <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-                                <select style="margin-bottom:10px">
+                                <select style="margin-bottom:12px">
                                     <option>Default</option>
                                     <option>FBI</option>
                                     <option>SAS</option>
@@ -1197,8 +1330,8 @@
                             <div class="box">
                                 <div class="box-title">Glove Chams</div>
                                 <div class="row"><span>Enabled</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-                                <div class="color-btn" style="background:#ffa502" onclick="document.getElementById('glove-col').click()"></div>
-                                <input type="color" id="glove-col" value="#ffa502">
+                                <div class="color-btn" style="background:#f59e0b" onclick="document.getElementById('glove-col').click()"></div>
+                                <input type="color" id="glove-col" value="#f59e0b">
                             </div>
                             
                             <div class="box">
@@ -1228,7 +1361,7 @@
                                 <div class="box-title">Inventory</div>
                                 <div class="row"><span>Auto Armor</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
                                 <div class="row"><span>Auto Defuser</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-                                <select style="margin-top:10px">
+                                <select style="margin-top:12px">
                                     <option>Primary: AK-47</option>
                                     <option>Primary: M4A4</option>
                                     <option>Primary: AWP</option>
@@ -1240,7 +1373,7 @@
                                     <option>Secondary: Deagle</option>
                                     <option>Secondary: P250</option>
                                 </select>
-                                <div class="check-grid" style="margin-top:10px">
+                                <div class="check-grid" style="margin-top:12px">
                                     <label class="check"><input type="checkbox" checked> HE</label>
                                     <label class="check"><input type="checkbox" checked> Flash</label>
                                     <label class="check"><input type="checkbox" checked> Smoke</label>
@@ -1262,14 +1395,14 @@
                             <div class="box">
                                 <div class="box-title">Sound</div>
                                 <div class="row"><span>Hitsound</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-                                <select style="margin-top:10px">
+                                <select style="margin-top:12px">
                                     <option>Default</option>
                                     <option>Metallic</option>
                                     <option>Bell</option>
                                     <option>Coin</option>
                                     <option>Custom...</option>
                                 </select>
-                                <div class="row" style="margin-top:10px"><span>Killsound</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                                <div class="row" style="margin-top:12px"><span>Killsound</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                                 <div class="row"><span>Volume Override</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
                                 <div class="slider-box">
                                     <div class="slider-top"><span>Volume</span><span class="slider-val" id="snd-vol">100%</span></div>
@@ -1406,7 +1539,7 @@
                             
                             <div class="box">
                                 <div class="box-title">Weapon ID</div>
-                                <input type="text" class="input" placeholder="Enter weapon ID..." style="margin-bottom:10px">
+                                <input type="text" class="input" placeholder="Enter weapon ID..." style="margin-bottom:12px">
                                 <div class="wep-grid" style="max-height:150px">
                                     <div class="wep on">AK47</div>
                                     <div class="wep">M4A4</div>
@@ -1447,7 +1580,7 @@
                                     <input type="text" class="input" placeholder="Skin ID...">
                                     <button class="btn">Add</button>
                                 </div>
-                                <div class="btn-row" style="margin-top:10px">
+                                <div class="btn-row" style="margin-top:12px">
                                     <button class="btn btn-line">Update</button>
                                     <button class="btn btn-line">Force</button>
                                 </div>
@@ -1455,11 +1588,121 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- THEME -->
+                <div class="page" id="theme">
+                    <div class="theme-grid">
+                        <div class="theme-box">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 0 30px rgba(139,92,246,0.4)"></div>
+                            <div class="theme-name">Purple</div>
+                            <button class="theme-btn active" onclick="setTheme('purple')">Active</button>
+                        </div>
+                        
+                        <div class="theme-box">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #ef4444, #f87171); box-shadow: 0 0 30px rgba(239,68,68,0.4)"></div>
+                            <div class="theme-name">Red</div>
+                            <button class="theme-btn" onclick="setTheme('red')">Apply</button>
+                        </div>
+                        
+                        <div class="theme-box">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #10b981, #34d399); box-shadow: 0 0 30px rgba(16,185,129,0.4)"></div>
+                            <div class="theme-name">Green</div>
+                            <button class="theme-btn" onclick="setTheme('green')">Apply</button>
+                        </div>
+                        
+                        <div class="theme-box">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #3b82f6, #60a5fa); box-shadow: 0 0 30px rgba(59,130,246,0.4)"></div>
+                            <div class="theme-name">Blue</div>
+                            <button class="theme-btn" onclick="setTheme('blue')">Apply</button>
+                        </div>
+                        
+                        <div class="theme-box">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #f59e0b, #fbbf24); box-shadow: 0 0 30px rgba(245,158,11,0.4)"></div>
+                            <div class="theme-name">Gold</div>
+                            <button class="theme-btn" onclick="setTheme('gold')">Apply</button>
+                        </div>
+                        
+                        <div class="theme-box">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #ec4899, #f472b6); box-shadow: 0 0 30px rgba(236,72,153,0.4)"></div>
+                            <div class="theme-name">Pink</div>
+                            <button class="theme-btn" onclick="setTheme('pink')">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <div class="box custom-theme" style="margin-top:25px">
+                        <div class="box-title">Custom Colors</div>
+                        <div class="color-picker-row">
+                            <span class="color-picker-label">Primary Color</span>
+                            <div class="color-btn" style="background:#8b5cf6;width:40px;height:40px" onclick="document.getElementById('custom-primary').click()"></div>
+                            <input type="color" id="custom-primary" value="#8b5cf6" onchange="updateCustomTheme()">
+                        </div>
+                        <div class="color-picker-row">
+                            <span class="color-picker-label">Secondary Color</span>
+                            <div class="color-btn" style="background:#a78bfa;width:40px;height:40px" onclick="document.getElementById('custom-secondary').click()"></div>
+                            <input type="color" id="custom-secondary" value="#a78bfa" onchange="updateCustomTheme()">
+                        </div>
+                        <div class="color-picker-row">
+                            <span class="color-picker-label">Background Color</span>
+                            <div class="color-btn" style="background:#0f0f1a;width:40px;height:40px" onclick="document.getElementById('custom-bg').click()"></div>
+                            <input type="color" id="custom-bg" value="#0f0f1a" onchange="updateCustomTheme()">
+                        </div>
+                        <div class="color-picker-row">
+                            <span class="color-picker-label">Panel Color</span>
+                            <div class="color-btn" style="background:#1a1a2e;width:40px;height:40px" onclick="document.getElementById('custom-panel').click()"></div>
+                            <input type="color" id="custom-panel" value="#1a1a2e" onchange="updateCustomTheme()">
+                        </div>
+                        <button class="btn" style="width:100%;margin-top:15px" onclick="applyCustomTheme()">Apply Custom Theme</button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
     
     <script>
+        const themes = {
+            purple: { accent: '#8b5cf6', accentLight: '#a78bfa', bg: '#0f0f1a', panel: '#1a1a2e' },
+            red: { accent: '#ef4444', accentLight: '#f87171', bg: '#1a0f0f', panel: '#2e1a1a' },
+            green: { accent: '#10b981', accentLight: '#34d399', bg: '#0f1a14', panel: '#1a2e22' },
+            blue: { accent: '#3b82f6', accentLight: '#60a5fa', bg: '#0f141a', panel: '#1a222e' },
+            gold: { accent: '#f59e0b', accentLight: '#fbbf24', bg: '#1a170f', panel: '#2e281a' },
+            pink: { accent: '#ec4899', accentLight: '#f472b6', bg: '#1a0f14', panel: '#2e1a22' }
+        };
+        
+        function setTheme(themeName) {
+            const theme = themes[themeName];
+            const root = document.documentElement;
+            
+            root.style.setProperty('--accent', theme.accent);
+            root.style.setProperty('--accent-light', theme.accentLight);
+            root.style.setProperty('--bg', theme.bg);
+            root.style.setProperty('--panel', theme.panel);
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.textContent = 'Apply';
+                btn.classList.remove('active');
+            });
+            
+            event.target.textContent = 'Active';
+            event.target.classList.add('active');
+        }
+        
+        function updateCustomTheme() {
+            // Preview update
+        }
+        
+        function applyCustomTheme() {
+            const root = document.documentElement;
+            root.style.setProperty('--accent', document.getElementById('custom-primary').value);
+            root.style.setProperty('--accent-light', document.getElementById('custom-secondary').value);
+            root.style.setProperty('--bg', document.getElementById('custom-bg').value);
+            root.style.setProperty('--panel', document.getElementById('custom-panel').value);
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.textContent = 'Apply';
+                btn.classList.remove('active');
+            });
+        }
+        
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1478,7 +1721,8 @@
                     'chams': 'Chams',
                     'misc': 'Miscellaneous',
                     'configs': 'Config Manager',
-                    'skins': 'Skin Changer'
+                    'skins': 'Skin Changer',
+                    'theme': 'Theme Settings'
                 };
                 document.getElementById('page-title').textContent = titles[page];
             });
@@ -1495,7 +1739,9 @@
         
         document.querySelectorAll('input[type="color"]').forEach(picker => {
             picker.addEventListener('input', function() {
-                this.previousElementSibling.style.background = this.value;
+                if (this.previousElementSibling && this.previousElementSibling.classList.contains('color-btn')) {
+                    this.previousElementSibling.style.background = this.value;
+                }
             });
         });
     </script>
